@@ -25,15 +25,23 @@ also divided into quadrants, but we can ignore horizontal-angle differences for
 this discussion.)
 
 I then placed a light with this IES profile at the center of a sphere, and
-rendered the interior of the sphere, from verticalAngle 0° to 180°, to generate
-an output that looks like this with no angleScale applied:
+rendered the interior of the sphere twice, with a camera (also at the sphere
+center) with a 90° field-of-view:
+
+- horizontal angles -45° to 45°, vertical angles 0° to 90°
+- horizontal angles -45° to 45°, vertical angles 90° to 180°
+
+The images were stitched together to give an output that looks like this, with
+no angleScale applied:
 
 <img src="https://pmolodo.github.io/luxtest/img/iesTest-ris.0011.png" title="IES
 Test Profile Render Reference" height="200"> \
 [\[exr\]][ies_test_ref_exr]
 
-More details on exact rendering procedure can be found in
-[this repo][luxtest_repo].
+(The exact `.usda` rendered can be found [here][iesTest_usda]; frame 11 was used
+to create the reference render above (`angleScale=0`), while frames 11-20 show a
+progression from `angleScale=-1` to `angleScale=1`.  [This repo][luxtest_repo]
+was used to perform the rendering.)
 
 ## Existing formulas
 
