@@ -195,6 +195,7 @@ This would allow us to support behavior "similar" to either of the current Karma
 or RenderMan formulas, without having to add any new attributes.
 
 **Mathematical Description:**
+
 $$
 \theta_{ies} =
 \begin{dcases}
@@ -232,6 +233,7 @@ the  verticalAngle / $\theta$, and leave the horizontalAngle / $\phi$
 untouched.)
 
 **Mathematical Description:**
+
 $$
 \theta_{ies} =
     \frac{\theta_{light} - vAngleScaleOrigin}{angleScale} + vAngleScaleOrigin
@@ -279,37 +281,39 @@ backwards-compatible mapping.
 
 **Mathematical Description:**
 
-- If `angleScaleDirection = "vertical"`:
-    - then `hAngleScaleOrigin` is ignored, and the formula is the same as in
-      [Option B][option_b] above.
+#### If `angleScaleDirection = "vertical"`:
+- then `hAngleScaleOrigin` is ignored, and the formula is the same as in
+  [Option B][option_b] above.
 
-- If `angleScaleDirection = "radial"`:
-    - then let
-      $$
-            R(\theta,\ \phi) \rightarrow (\theta',\ \phi')
-      $$
+#### If `angleScaleDirection = "radial"`:
 
-      represent the shortest-angle rotation of the
-      $(vScaleOrigin, hScaleOrigin)$ direction to align with the the
-      $\theta = 0$ axis, where $(\theta',\ \phi')$ is the image of
-      $(\theta,\ \phi)$ after this rotation.
+- Then let $R$ represent the shortest-angle rotation of the
+  $(vScaleOrigin, hScaleOrigin)$ direction to align with the the
+  $\theta = 0$ axis, where $(\theta',\ \phi')$ is the image of
+  $(\theta,\ \phi)$ after this rotation:
 
-    - To translate from $(\theta_{light}, \phi_{light})$ to
-      $(\theta_{ies}, \phi_{ies})$, we:
-        - perform a rotation by $R$
-          $$ (\theta_{light}',\ \phi_{light}') = R(\theta_{light},\ \phi_{light}) $$
+$$
+    R(\theta,\ \phi) \rightarrow (\theta',\ \phi')
+$$
 
-        - scale the $\theta'$ coordinate by `angleScale`:
-          $$
-          \begin{align*}
-              \theta_{ies}' &= \frac{\theta_{light}'}{angleScale} \\
-              \phi_{ies}' &= \phi_{light}'                        \\
-          \end{align*}
-          $$
-        -  then inverse rotate by $R^{-1}$ to get back to our original spherical
-           coordinate system:
+- To translate from $(\theta_{light}, \phi_{light})$ to
+  $(\theta_{ies}, \phi_{ies})$, we first perform a rotation by $R$
 
-      $$ (\theta_{ies},\ \phi_{ies}) = R^{-1}(\theta_{ies}',\ \phi_{ies}') $$
+$$ (\theta_{light}',\ \phi_{light}') = R(\theta_{light},\ \phi_{light}) $$
+
+- Scale the $\theta'$ coordinate by `angleScale`:
+
+$$
+\begin{align*}
+    \theta_{ies}' &= \frac{\theta_{light}'}{angleScale} \\
+    \phi_{ies}' &= \phi_{light}'                        \\
+\end{align*}
+$$
+
+- Then inverse rotate by $R^{-1}$ to get back to our original spherical
+  coordinate system:
+
+$$ (\theta_{ies},\ \phi_{ies}) = R^{-1}(\theta_{ies}',\ \phi_{ies}') $$
 
 Pros:
 - can work "intuitively" with lights aimed in ANY direction
