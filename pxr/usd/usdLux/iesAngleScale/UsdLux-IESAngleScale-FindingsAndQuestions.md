@@ -286,10 +286,10 @@ Cons:
   future
 - Non-intuitive "switch" in behavior when the angleScale crosses 0
 
-### B. Add `vAngleScaleOrigin` attribute
+### B. Add `vAngleScaleCenter` attribute
 
 **New Attributes:** (exact names TBD)
-- `float inputs:shaping:ies:vAngleScaleOrigin = 0`
+- `float inputs:shaping:ies:vAngleScaleCenter = 0`
   - Valid Range: $[0, 180]$
   - Units: degrees
 
@@ -305,14 +305,14 @@ untouched.)
 
 $$
 \theta_{ies} =
-    \frac{\theta_{light} - vAngleScaleOrigin}{angleScale} + vAngleScaleOrigin
+    \frac{\theta_{light} - vAngleScaleCenter}{angleScale} + vAngleScaleCenter
 $$
 
 Pros:
 - Can work "intuitively" with lights aimed either up OR down
 - Provides a backwards-compatible mapping for either RenderMan or Karma
 - Provides an "easy" path to later supporting "any" aim direction in the future
-  (by adding `hAngleScaleOrigin` and `angleScaleDirection` - see
+  (by adding `hAngleScaleCenter` and `angleScaleDirection` - see
   [Option C][option_C])
 
 Cons:
@@ -324,16 +324,16 @@ Cons:
 
 Notes:
 - In the future, we could possibly allow "auto-dectection" of
-  `vAngleScaleOrigin` by, ie, setting `vAngleScaleOrigin = -1`
+  `vAngleScaleCenter` by, ie, setting `vAngleScaleCenter = -1`
 
-### C. Add `vAngleScaleOrigin`, `hAngleScaleOrigin`, and `angleScaleDirection` attributes
+### C. Add `vAngleScaleCenter`, `hAngleScaleCenter`, and `angleScaleDirection` attributes
 
 **New Attributes:** (exact names TBD)
 
-- `float inputs:shaping:ies:vAngleScaleOrigin = 0`
+- `float inputs:shaping:ies:vAngleScaleCenter = 0`
   - Valid Range: $[0, 180]$
   - Units: degrees
-- `float inputs:shaping:ies:hAngleScaleOrigin = 0`
+- `float inputs:shaping:ies:hAngleScaleCenter = 0`
   - Valid Range: $[0, 360]$
   - Units: degrees
 - `token inputs:shaping:ies:angleScaleDirection = "radial"`
@@ -342,7 +342,7 @@ Notes:
 By setting `angleScaleDirection` to `radial`, we would remap BOTH vertical
 angles and horizontal angles, to allow circular profile scaling about any
 aribtrary direction, and "intuitive" profile scaling for any type of spotlight
-(by setting `vAngleScaleOrigin` and `hAngleScaleOrign` to align with the
+(by setting `vAngleScaleCenter` and `hAngleScaleOrign` to align with the
 profile's "primary" axis).  The inclusion of `angleScaleDirection` as an option
 allows a backwards-compatible mapping to existing behavior by setting it to
 `vertical` - the attribute could be dropped if we don't care about maintaining a
@@ -351,7 +351,7 @@ backwards-compatible mapping.
 **Mathematical Description:**
 
 #### If `angleScaleDirection = "vertical"`:
-- then `hAngleScaleOrigin` is ignored, and the formula is the same as in
+- then `hAngleScaleCenter` is ignored, and the formula is the same as in
   [Option B][option_b] above.
 
 #### If `angleScaleDirection = "radial"`:
@@ -413,8 +413,8 @@ Cons:
 <!-- ################################ -->
 
 <!--     Internal Links -->
-[option_B]: #add-vanglescaleorigin-attribute
-[option_C]: #add-vanglescaleorigin-hanglescaleorigin-and-anglescaledirection-attributes
+[option_B]: #add-vAngleScaleCenter-attribute
+[option_C]: #add-vAngleScaleCenter-hAngleScaleCenter-and-anglescaledirection-attributes
 
 <!--     General External URLs -->
 [ies_angleScale_doc]:
