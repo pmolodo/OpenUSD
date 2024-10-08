@@ -17,61 +17,29 @@ findings and solicit advice.
 
 ## Visualization
 
-### Striped IES Test file
+### Render 1 - Preview render
 
-To help visualize the effect of the angleScale, I created a [test .ies
-file][ies_test_file] consisting of bands of alternating dark/light horizontal
-stripes.  The bottom (verticalAngle=0) is always .25 (gray-black) and the top
-(verticalAngle=180) is always .75 (gray-white). (The horizontal angle space is
-also divided into quadrants, but we can ignore horizontal-angle differences for
-this discussion.)
+The most intuitive way to get a sense for the data in an `.ies` file is to
+provide a rendering of what a basic scene illuminated by that light might look
+like.  This is the approach used by [ieslibrary.com](ieslibrary.com) in it's
+preview lights, so I decided to roughly replicate their setup:
 
-### Render 1 - Interior of sphere
+- scene has a floor and a wall (both perfectly diffuse)
+- light is placed 1 meter above the floor, and 5 cm in front of the wall
+- camera is 2.5 meters above the floor, and 4 meters in front of the wall
+- camera is aimed back at the wall / light, angled down 30° from parallel
+  to the floor
+- light is oriented so that:
+  - down is 0° vertical
+  - up is 180° vertical
+  - 0° horizontal is aimed toward the camera
+  - +90° horizontal is screen left (from camera's point of view)
+  - -90° / +270° horizontal is screen right (from camera's point of view)
 
-I then placed a light with this IES profile at the center of a sphere, and
-rendered the interior of the sphere twice, with a camera (also at the sphere
-center) with a 90° field-of-view:
+#### Render 1 Example:
 
-- horizontal angles -45° to 45°, vertical angles 0° to 90°
-- horizontal angles -45° to 45°, vertical angles 90° to 180°
-
-The images were stitched together to give an output that looks like this, with
-no angleScale applied:
-
-<table>
-  <tr>
-    <td>
-    <td>+180° vertical
-    <td>
-  </tr>
-  <tr>
-    <td> +45° horizontal
-    <td>
-      <img src="https://pmolodo.github.io/luxtest/img/iesTest-ris.0001.png"
-           title="IES Test Profile Render Reference" height="200"> <p>
-      <a href=https://github.com/pmolodo/luxtest_renders/raw/05009617532a0bbfe95105089d6660b9c11b817a/ris/iesTest-ris.0001.exr>
-        [exr]
-      </a>
-      <a href=https://pmolodo.github.io/luxtest/img/iesTest-ris.0001.png>
-        [png]
-      </a>
-     </td>
-    <td> -45° horizontal<p>(+315° horizontal)
-  </tr>
-  <tr>
-    <td>
-    <td>0° vertical
-    <td>
-  </tr>
-</table>
-
-### Render #2 - Preview render
-
-While the projection of the light onto interior of sphere gives a good
-representation of the data in a `.ies` file, it doesn't show what such a light
-might look like "in the real world."  To this end, I created a render stage
-intended to look roughly similar to the previews shown on
-[ieslibrary.com](ieslibrary.com). 
+For an example of this render, I used a downward-aimed light picked
+arbitrarily from [ieslibrary.com](ieslibrary.com):
 
 <table>
   <tr>
@@ -82,13 +50,20 @@ intended to look roughly similar to the previews shown on
   <tr>
     <td> +90° horizontal
     <td>
-      <img src="https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0001.png"
-           title="IES Preview Render Reference" height="200"> <p>
-      <a href=https://github.com/pmolodo/luxtest_renders/raw/05009617532a0bbfe95105089d6660b9c11b817a/ris/iesLibPreview-ris.0001.exr>
+      <img src="https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0001.png"
+           title="Render 1 - Preview render - Example downward light" height="200"> <p>
+      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/karma/iesLibPreview-karma.0001.exr">
         [exr]
       </a>
-      <a href=https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0001.png>
+      <a href="https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0001.png">
         [png]
+      </a>
+      <a href="https://ieslibrary.com/browse/download/ies/04f377f94ce81cd7b5101fffdf571454/bf62776e70fb1699c9163756404c6c7ac19a1d875f069d2e964f69722374be23?cHash=1d691542fcd0ce49d33daf0288d2092e">
+        [ies]
+      </a>
+      <br>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesLibPreview.usda">
+        [usda (frame 1)]
       </a>
      </td>
     <td> -90° horizontal<p>(+270° horizontal)
@@ -100,14 +75,144 @@ intended to look roughly similar to the previews shown on
   </tr>
 </table>
 
-### Rendering Details:
-- The exact `.usda` files rendered can be found here:
-  - [Usda - Render 1 - Interior of sphere][iesTest_usda]
-  - [Usda - Render2 - Preview render][iesLibPreview_usda]
-- For both renders:
-  - Frame 1 was used to create the reference renders above (`angleScale=0`)
-  - Frames 2-10 show a progression from `angleScale=-1` to `angleScale=1`
-  - [This repo][luxtest_repo] was used to perform the rendering
+
+### Render 2 - Interior of sphere
+
+While the above render gives a quick sense of what the light might look like in
+the world, it's not good for displaying the distribution of the light across
+the entire 0° (bottom) to 180° (top) range of vertical angles, as the scene
+is set up to mostly highlight downward emissions.
+
+To view the entire vertical-angle distribution, I made a second scene rendering
+the light casting on the interior of a sphere:
+
+- a light with the IES profile is at the center of a sphere
+- a camera with a 90° field of view is also placed at the sphere center
+- the interior of the sphere is rendered twice, aimed to display:
+    - horizontal angles -45° to 45°, vertical angles 90° to 180° (top)
+    - horizontal angles -45° to 45°, vertical angles 0° to 90° (bottom)
+- the two renders are then stitched together to create a single image
+
+#### Render 2 Example:
+
+For an example of this render, I used the same downward-aimed light picked
+arbitrarily from [ieslibrary.com](ieslibrary.com) used in the previous render:
+
+<table>
+  <tr>
+    <td>
+    <td>+180° vertical
+    <td>
+  </tr>
+  <tr>
+    <td> +45° horizontal
+    <td>
+      <img src="https://pmolodo.github.io/luxtest/img/iesTest-karma.0001.png"
+           title="Render 2 - Interior of sphere - Example downward light" height="200"> <p>
+      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/karma/iesTest-karma.0001.exr">
+        [exr]
+      </a>
+      <a href="https://pmolodo.github.io/luxtest/img/iesTest-karma.0001.png">
+        [png]
+      </a>
+      <a href="https://ieslibrary.com/browse/download/ies/04f377f94ce81cd7b5101fffdf571454/bf62776e70fb1699c9163756404c6c7ac19a1d875f069d2e964f69722374be23?cHash=1d691542fcd0ce49d33daf0288d2092e">
+        [ies]
+      </a>
+      <br>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesTest.usda">
+        [usda (frame 1)]
+      </a>
+     </td>
+    <td> -45° horizontal<p>(+315° horizontal)
+  </tr>
+  <tr>
+    <td>
+    <td>0° vertical
+    <td>
+  </tr>
+</table>
+
+
+### Striped IES Test file
+
+Finally, to visualize the effect of the angleScale, I created a [test .ies
+file][ies_test_file] consisting of bands of alternating dark/light horizontal
+stripes every 10 vertical degrees.  The bottom (verticalAngle=0) is always .25
+(gray-black) and the top (verticalAngle=180) is always .75 (gray-white). (The
+horizontal angle space is also divided into quadrants, but we can ignore
+horizontal-angle differences for this discussion.)
+
+#### Striped IES File: Render 1 - Preview Render:
+
+<table>
+  <tr>
+    <td>
+    <td> +180° vertical, +180° horizontal
+    <td>
+  </tr>
+  <tr>
+    <td> +90° horizontal
+    <td>
+      <img src="https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0011.png"
+           title="Striped IES File: Render 1 - Preview Render" height="200"> <p>
+      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/karma/iesLibPreview-karma.0011.exr">
+        [exr]
+      </a>
+      <a href="https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0011.png">
+        [png]
+      </a>
+      <a href="https://github.com/pmolodo/luxtest/blob/0f9955768eca64557be5150b78134b560749e392/test_vstripes_hquadrants_nonuniform.ies">
+        [ies]
+      </a>
+      <br>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesLibPreview.usda">
+        [usda (frame 11)]
+      </a>
+     </td>
+    <td> -90° horizontal<p>(+270° horizontal)
+  </tr>
+  <tr>
+    <td>
+    <td>0° vertical, 0° horizontal
+    <td>
+  </tr>
+</table>
+
+#### Striped IES File: Render 2 - Interior of sphere:
+
+<table>
+  <tr>
+    <td>
+    <td>+180° vertical
+    <td>
+  </tr>
+  <tr>
+    <td> +45° horizontal
+    <td>
+      <img src="https://pmolodo.github.io/luxtest/img/iesTest-karma.0011.png"
+           title="Striped IES File: Render 2 - Interior of sphere" height="200"> <p>
+      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/karma/iesTest-karma.0011.exr">
+        [exr]
+      </a>
+      <a href="https://pmolodo.github.io/luxtest/img/iesTest-karma.0011.png">
+        [png]
+      </a>
+      <a href="https://github.com/pmolodo/luxtest/blob/0f9955768eca64557be5150b78134b560749e392/test_vstripes_hquadrants_nonuniform.ies">
+        [ies]
+      </a>
+      <br>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesLibPreview.usda">
+        [usda (frame 11)]
+      </a>
+     </td>
+    <td> -45° horizontal<p>(+315° horizontal)
+  </tr>
+  <tr>
+    <td>
+    <td>0° vertical
+    <td>
+  </tr>
+</table>
 
 
 ## Existing formulas
@@ -132,8 +237,8 @@ $(1 + angleScale)$, offset so the scale origin is at $(\theta_{light},\ \theta_{
 
 | -1.00         | -0.75         | -0.50         | -0.25         | ~0.00         | +0.25         | +0.50         | +0.75         | +1.00         |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| ![RM-1.0_tst] | ![RM-.75_tst] | ![RM-.50_tst] | ![RM-.25_tst] | ![RM~.00_tst] | ![RM+.25_tst] | ![RM+.50_tst] | ![RM+.75_tst] | ![RM+1.0_tst] |
 | ![RM-1.0_pre] | ![RM-.75_pre] | ![RM-.50_pre] | ![RM-.25_pre] | ![RM~.00_pre] | ![RM+.25_pre] | ![RM+.50_pre] | ![RM+.75_pre] | ![RM+1.0_pre] |
+| ![RM-1.0_tst] | ![RM-.75_tst] | ![RM-.50_tst] | ![RM-.25_tst] | ![RM~.00_tst] | ![RM+.25_tst] | ![RM+.50_tst] | ![RM+.75_tst] | ![RM+1.0_tst] |
 | ![RM-1.0_gph] | ![RM-.75_gph] | ![RM-.50_gph] | ![RM-.25_gph] | ![RM~.00_gph] | ![RM+.25_gph] | ![RM+.50_gph] | ![RM+.75_gph] | ![RM+1.0_gph] |
 
 
@@ -165,8 +270,8 @@ $(\theta_{light},\ \theta_{ies}) = (0,\ 0)$:
 
 | -1.00         | -0.75         | -0.50         | -0.25         | ~0.00         | +0.25         | +0.50         | +0.75         | +1.00         |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| ![Ka-1.0_tst] | ![Ka-.75_tst] | ![Ka-.50_tst] | ![Ka-.25_tst] | ![Ka~.00_tst] | ![Ka+.25_tst] | ![Ka+.50_tst] | ![Ka+.75_tst] | ![Ka+1.0_tst] |
 | ![Ka-1.0_pre] | ![Ka-.75_pre] | ![Ka-.50_pre] | ![Ka-.25_pre] | ![Ka~.00_pre] | ![Ka+.25_pre] | ![Ka+.50_pre] | ![Ka+.75_pre] | ![Ka+1.0_pre] |
+| ![Ka-1.0_tst] | ![Ka-.75_tst] | ![Ka-.50_tst] | ![Ka-.25_tst] | ![Ka~.00_tst] | ![Ka+.25_tst] | ![Ka+.50_tst] | ![Ka+.75_tst] | ![Ka+1.0_tst] |
 | ![Ka-1.0_gph] | ![Ka-.75_gph] | ![Ka-.50_gph] | ![Ka-.25_gph] | ![Ka~.00_gph] | ![Ka+.25_gph] | ![Ka+.50_gph] | ![Ka+.75_gph] | ![Ka+1.0_gph] |
 
 -----------------------
@@ -211,6 +316,113 @@ spotlights, and *neither* will work "intuitively" for all lights:
   - works best for spotlights aimed "down"
   - ie, maximum brightness centered around $verticalAngle = 0°$ ($\theta = 0$)
 
+#### Animations - Examples of "Good" and "Bad" scaling
+
+What exactly does it mean that I say the formulas work "best" only for lights
+aimed in a certain direction?  After all, even if the scaling origin is not
+aligned to the ies light primary direction, it is still possible to achieve
+something that looks somewhat like scaling the light up and down.
+
+However, if origin + primary light direction are not aligned, though you can
+get the boundaries the light to shrink and grow, the behavior of the profile
+within it's boundaries is probably not what a lighter would expect.
+
+To help visualize what I mean, I've created animations showing behavior of
+both RenderMan and Karma for spot lights aimed both down and up.  They're
+displaying versions of my "striped" ies test file, but limited to a 90° cone
+aimed either down (ie, verticalAngle < 45°) or up (ie, verticalAngle > 135°).
+The `ies:angleScale` attribute is then animated to scale the light between
+.5 (45° cone angle) and 1.5 (135° cone angle) - due to the differences in the
+angleScale formula, the exact value need to achieve this varies in each case.
+
+<table>
+  <tr>
+    <td>Light Direction</td>
+    <td>RenderMan (Scale origin: Up)</td>
+    <td>Karma (Scale origin: Down)</td>
+  </tr>
+  <tr>
+    <td>Up</td>
+    <td style="vertical-align:top">
+      <video controls loop>
+        <source src="https://github.com/pmolodo/luxtest_renders/raw/refs/heads/main/iesUp-ris.mp4" type="video/mp4">
+        Your browser does not support displaying this video.
+      </video>
+      <p>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
+        [usda (frames 1-49)]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
+        [ies]
+      </a>
+      <ul>
+        <li> "Good" scaling - seems to grow + shrink
+        <li> angleScale: .5 scale = -.5; 1.5 scale = .5
+        <li> Please disregard the "blurry" rendering - I'm trying to resolve
+             <a href="https://renderman.pixar.com/forum/showthread.php?s=&postid=269779">this issue with RenderMan</a>
+        </li>
+      </ul>
+    </td>
+    <td style="vertical-align:top">
+      <video controls loop>
+        <source src="https://github.com/pmolodo/luxtest_renders/raw/refs/heads/main/iesUp-karma.mp4" type="video/mp4">
+        Your browser does not support displaying this video.
+      </video>
+      <p>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
+        [usda (frames 50-98)]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
+        [ies]
+      </a>
+      <ul>
+        <li> "Bad" scaling - bands are created + disappear, large dead area at center when scaling up
+        <li> angleScale: .5 scale = -0.142857; 1.5 scale = 0.166667
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>Down</td>
+    <td style="vertical-align:top">
+      <video controls loop>
+        <source src="https://github.com/pmolodo/luxtest_renders/raw/refs/heads/main/iesDown-ris.mp4" type="video/mp4">
+        Your browser does not support displaying this video.
+      </video>
+      <p>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
+        [usda (frames 1-49)]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
+        [ies]
+      </a>
+      <ul>
+        <li> "Bad" scaling - bands are created + disappear, large dead area at center when scaling up
+        <li> angleScale: .5 scale = 0.166667; 1.5 scale =-0.166667
+        <li> Please disregard the "blurry" rendering - I'm trying to resolve
+             <a href="https://renderman.pixar.com/forum/showthread.php?s=&postid=269779">this issue with RenderMan</a>
+        </li>
+      </ul>    </td>
+    <td style="vertical-align:top">
+      <video controls loop>
+        <source src="https://github.com/pmolodo/luxtest_renders/raw/refs/heads/main/iesDown-karma.mp4" type="video/mp4">
+        Your browser does not support displaying this video.
+      </video>
+      <p>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
+        [usda (frames 50-98)]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
+        [ies]
+      </a>
+      <ul>
+        <li> "Good" scaling - seems to grow + shrink
+        <li> angleScale: .5 scale = .5; 1.5 scale =-0.333333
+      </ul>
+    </td>
+  </tr>
+</table>
+
+
 #### Which is more common - spotlights aimed up or down?
 
 If [ieslibrary.com](ieslibrary.com) is indicative, lights aimed **down** are
@@ -234,8 +446,8 @@ Here's a chart directly comparing these two formulas, with the option I consider
 | Feature                                                      | RenderMan      | Karma     | Winner    |
 | ------------------------------------------------------------ | -------------- | --------- | --------- |
 | Scaling origin (works "best" with spotlights aimed this way) | Up (180°)      | Down (0°) |           |
-| • Allows "intuitive" scaling for "most common" spotlights    | No             | ***Yes*** | Karma     |
-| • Allows "intuitive" scaling for spotlight aimed up OR down  | No             | No        |           |
+| • Allows "good" scaling for "most common" spotlights    | No             | ***Yes*** | Karma     |
+| • Allows "good" scaling for spotlight aimed up OR down  | No             | No        |           |
 | Useable domain (angleScale)                                  | $(-1, \infty)$ | $[-1, 1]$ |           |
 | • Useable domain - Symmetric?                                | No             | ***Yes*** | Karma     |
 | Relation between angleScale and scaling control  | <b><i><ul><li>Negative: narrower<li>Positive: broader</ul></i></b> | <ul><li>Negative: broader<li>Positive: narrower</ul> | RenderMan |
@@ -247,7 +459,7 @@ Here's a chart directly comparing these two formulas, with the option I consider
 
 Unfortunately, I don't think either option is a clear winner, mostly because:
 
-- *Neither* will provide "intuitive" scaling for a spotlight aimed in any
+- *Neither* will provide "good" scaling for a spotlight aimed in any
   direction
 - *Neither* formula is "backward compatible" with the other - ie, there's no
   mapping from "old" values to "new" values that will result in unaltered
@@ -276,15 +488,19 @@ $$
 $$
 
 Pros:
-- Works "intuitively" with lights aimed either up OR down
+- Can give "good" scaling with lights aimed either up OR down
+  - Use positive values for lights aimed up
+  - Use negative values for lights aimed down
 - Requires no additional attributes
 - Provides a backwards-compatible mapping for either RenderMan or Karma
 
 Cons:
-- Doesn't work "intuitively" with ALL lights (ie, lights aimed to the side)
+- Doesn't give "good" scaling with ALL lights (ie, lights aimed to the side)
 - ...nor does it provide a clear path to supporting any aim direction in the
   future
 - Non-intuitive "switch" in behavior when the angleScale crosses 0
+- Requires user to figure out whether they should use negative or positive
+  values to get "good" scaling for their light
 
 ### B. Add `vAngleScaleCenter` attribute
 
@@ -294,7 +510,7 @@ Cons:
   - Units: degrees
 
 By adding one additional attribute, we could allow setting any vertical angle
-as the scale origin, providing a more intuitive way to support lights aimed
+as the scale origin, providing a clearer way to support lights aimed
 either up or down, as well as "partial" support for a light aimed in any
 direction (ie, we can locate the scaling origin in the correct place, but the
 scaling for lights aimed sideways will be distorted, since we still only alter
@@ -309,7 +525,7 @@ $$
 $$
 
 Pros:
-- Can work "intuitively" with lights aimed either up OR down
+- Can give "good" scaling with lights aimed either up OR down
 - Provides a backwards-compatible mapping for either RenderMan or Karma
 - Provides an "easy" path to later supporting "any" aim direction in the future
   (by adding `hAngleScaleCenter` and `angleScaleDirection` - see
@@ -317,6 +533,8 @@ Pros:
 
 Cons:
 - Requires 1 additional attribute
+- Requires setting an additional attribute to get "good" scaling for a given
+  light
 - Sort-of supports lights aimed to side - can center the vertical original, but
   horizontal mapping is not affected, so lights aimed to side will get
   "stretched" in vertical direction - ie, a circular spotlight will become an
@@ -431,6 +649,8 @@ Cons:
     https://github.com/pmolodo/luxtest/blob/0f9955768eca64557be5150b78134b560749e392/usd/iesLibPreview.usda
 [luxtest_repo]:
     https://github.com/pmolodo/luxtest/tree/0f9955768eca64557be5150b78134b560749e392
+[down_light_ies]:
+    https://ieslibrary.com/browse/download/ies/04f377f94ce81cd7b5101fffdf571454/bf62776e70fb1699c9163756404c6c7ac19a1d875f069d2e964f69722374be23?cHash=1d691542fcd0ce49d33daf0288d2092e
 [down_light]: https://ieslibrary.com/ies/BEGA/04f377f94ce81cd7b5101fffdf571454.jpg
 [side_light]: https://ieslibrary.com/ies/GE_LIGHTING_SOLUTIONS/000720b7043c3ae136132bbad11155ed.jpg
 [up_light]: https://ieslibrary.com/ies/BEGA/0184e55f1f5ef8ee9e8b006d6a7bf558.jpg

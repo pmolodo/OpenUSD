@@ -1,4 +1,4 @@
-# execfile(r"C:\src\NVIDIA\usd-ci\angleScale_formulas.py")
+# execfile(r"C:\src\NVIDIA\usd-ci\USD\pxr\usd\usdLux\iesAngleScale\angleScale_formulas.py")
 import inspect
 import math
 import os
@@ -83,7 +83,10 @@ def save_graph_slices(function, title, filename):
         filename_i = f"{filename}_{angleScale_str}"
         slice_func = function.subs(angleScale, angleScale_val)
         graph = spb.plot(slice_func, theta_lim, show=False, title=title_i)
-        if any(isinstance(x, sympy.core.numbers.ComplexInfinity) for x in slice_func.atoms()):
+        if any(
+            isinstance(x, sympy.core.numbers.ComplexInfinity)
+            for x in slice_func.atoms()
+        ):
             del graph.series[0]
             axes = graph.ax
             set_axis_limits(axes)
@@ -121,10 +124,19 @@ def plot3d_and_save(function, title, slices=False):
 karma_pos = theta / (1 - angleScale)
 karma_neg = theta * (1 + angleScale)
 
-karma = sympy.Piecewise((0, angleScale < -1), (karma_neg, angleScale < 0), (karma_pos, angleScale < 1), (0, True))
+karma = sympy.Piecewise(
+    (0, angleScale < -1),
+    (karma_neg, angleScale < 0),
+    (karma_pos, angleScale < 1),
+    (0, True),
+)
 karma_clamp = Clamp(karma, 0, theta_max)
 
-karma_pos_clamp = Clamp(sympy.Piecewise((0, angleScale < -1), (karma_pos, angleScale < 1), (0, True)), 0, theta_max)
+karma_pos_clamp = Clamp(
+    sympy.Piecewise((0, angleScale < -1), (karma_pos, angleScale < 1), (0, True)),
+    0,
+    theta_max,
+)
 
 
 # karma_pos_graph = plot3d_and_save(karma_pos, "Karma (positive)")
@@ -135,7 +147,9 @@ karma_graph = plot3d_and_save(karma, "Karma (unclamped)")
 karma_clamp_graph = plot3d_and_save(karma_clamp, "Karma (clamped)", slices=True)
 # save_graph_slices(karma_clamp, "ies_angleScale_karma_clamped")
 
-karma_pos_clamp_graph = plot3d_and_save(karma_pos_clamp, "Karma - theta / (1-angleScale) only (clamped)")
+karma_pos_clamp_graph = plot3d_and_save(
+    karma_pos_clamp, "Karma - theta / (1-angleScale) only (clamped)"
+)
 
 profile_scale = 1 + angleScale
 rman = ((theta - theta_max) / profile_scale) + theta_max
@@ -149,3 +163,42 @@ if INTERACTIVE_VIEW:
     plt.show()
 else:
     plt.close("all")
+
+# from sympy.solvers import solve
+
+# rtheta, ktheta = sympy.symbols("rtheta ktheta")
+# req = rtheta - rman
+# keq = ktheta - karma
+
+
+# # renderman - light aimed down - 22.5 vangle (real world) maps to 45 (ies lookup)
+# solve(req.subs({rtheta: 45, theta: 22.5}), angleScale)
+# # 1/6 = 0.16666666666666666
+
+# # renderman - light aimed down - 67.5 vangle (real world) maps to 45 (ies lookup)
+# solve(req.subs({rtheta: 45, theta: 67.5}), angleScale)
+# # -1/6 = -0.16666666666666666
+
+# # karma - light aimed down - 22.5 vangle (real world) maps to 45 (ies lookup)
+# solve(keq.subs({ktheta: 45, theta: 22.5}), angleScale)
+# # 1/2 = .5
+
+# # karma - light aimed down - 67.5 vangle (real world) maps to 45 (ies lookup)
+# solve(keq.subs({ktheta: 45, theta: 67.5}), angleScale)
+# # -1/3 = -0.3333333333333333
+
+# # renderman - light aimed up - 112.5 vangle (real world) maps to 135 (ies lookup)
+# solve(req.subs({rtheta: 135, theta: 112.5}), angleScale)
+# # 1/2 = .5
+
+# # renderman - light aimed up - 157.5 vangle (real world) maps to 135 (ies lookup)
+# solve(req.subs({rtheta: 135, theta: 157.5}), angleScale)
+# # -1/2 = -.5
+
+# # karma - light aimed up - 112.5 vangle (real world) maps to 135 (ies lookup)
+# solve(keq.subs({ktheta: 135, theta: 112.5}), angleScale)
+# # 1/6 =  0.16666666666666666
+
+# # karma - light aimed up - 157.5 vangle (real world) maps to 135 (ies lookup)
+# solve(keq.subs({ktheta: 135, theta: 157.5}), angleScale)
+# # -1/7 = -0.14285714285714285
