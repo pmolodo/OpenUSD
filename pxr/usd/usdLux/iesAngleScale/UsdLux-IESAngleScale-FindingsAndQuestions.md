@@ -637,6 +637,7 @@ Cons:
 
 | Feature                                                      | A (Bimodal)         | B (vAngle Attr) | C (vangle + hAngle Attrs) |
 | ------------------------------------------------------------ | ------------------- | --------------- | ------------------------- |
+| Required additional attributes                               | 0                   | 1               | 3                         |
 | Allows "intuitive" scaling for spotlight aimed up OR down    | Yes                 | Yes             | Yes                       |
 | Allows "intuitive" scaling for spotlights aimed anywhere     | No                  | Distorted       | ***Yes***                 |
 | Useable domain (angleScale)                                  | $(-\infty, \infty)$ | $[0, \infty)$   | $[0, \infty)$             |
