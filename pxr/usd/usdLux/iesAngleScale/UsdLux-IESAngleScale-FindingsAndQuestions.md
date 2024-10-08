@@ -626,11 +626,10 @@ Pros:
 - can work "intuitively" with lights aimed in ANY direction
 - provides a backwards-compatible mapping for either RenderMan or Karma
 - can provide a possible upgrade path from [Option B][option_b], allowing an
-  incremental upgrade path that we follow only if there is demand for
-  IES profile angle-scaling.
+  incremental upgrade path that we can follow only if there is demand
 
 Cons:
-- Requires 3 additional attribute
+- Requires 3 additional attributes
 - Most complex, and likely only useful for a relatively small number of lights
   (ie, ones aimed sideways)
 
