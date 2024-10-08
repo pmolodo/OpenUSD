@@ -63,8 +63,8 @@ arbitrarily from [ieslibrary.com](ieslibrary.com):
       </a>
       <br>
       <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesLibPreview.usda">
-        [usda (frame 1)]
-      </a>
+        [usda]
+      </a> (frame 1)
      </td>
     <td> -90° horizontal<p>(+270° horizontal)
   </tr>
@@ -120,8 +120,8 @@ arbitrarily from [ieslibrary.com](ieslibrary.com) used in the previous render:
       </a>
       <br>
       <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesTest.usda">
-        [usda (frame 1)]
-      </a>
+        [usda]
+      </a> (frame 1)
      </td>
     <td> -45° horizontal<p>(+315° horizontal)
   </tr>
@@ -166,8 +166,8 @@ horizontal-angle differences for this discussion.)
       </a>
       <br>
       <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesLibPreview.usda">
-        [usda (frame 11)]
-      </a>
+        [usda]
+      </a> (frame 11)
      </td>
     <td> -90° horizontal<p>(+270° horizontal)
   </tr>
@@ -202,8 +202,8 @@ horizontal-angle differences for this discussion.)
       </a>
       <br>
       <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesLibPreview.usda">
-        [usda (frame 11)]
-      </a>
+        [usda]
+      </a> (frame 11)
      </td>
     <td> -45° horizontal<p>(+315° horizontal)
   </tr>
@@ -335,6 +335,7 @@ The `ies:angleScale` attribute is then animated to scale the light between
 .5 (45° cone angle) and 1.5 (135° cone angle) - due to the differences in the
 angleScale formula, the exact value need to achieve this varies in each case.
 
+
 <table>
   <tr>
     <td>Light Direction</td>
@@ -342,19 +343,40 @@ angleScale formula, the exact value need to achieve this varies in each case.
     <td>Karma (Scale origin: Down)</td>
   </tr>
   <tr>
-    <td>Up</td>
+    <td rowspan="2">Up</td>
     <td style="vertical-align:top">
-      <video controls loop>
-        <source src="https://github.com/pmolodo/luxtest_renders/raw/refs/heads/main/iesUp-ris.mp4" type="video/mp4">
+      <video controls loop src="https://github.com/user-attachments/assets/f79c0502-d602-48e3-94d1-a88f1e084822" type="video/mp4" height="200">
         Your browser does not support displaying this video.
       </video>
-      <p>
-      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
-        [usda (frames 1-49)]
+      <br>
+      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/iesUp-ris.mp4">
+        [mp4]
       </a>
       <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
         [ies]
       </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
+        [usda]
+      </a> (frames 1-49)
+    </td>
+    <td style="vertical-align:top">
+      <video controls loop src="https://github.com/user-attachments/assets/a4494800-49ea-4819-8d37-32074535aca8" type="video/mp4" height="200">
+        Your browser does not support displaying this video.
+      </video>
+      <br>
+      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/iesUp-karma.mp4">
+        [mp4]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
+        [ies]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
+        [usda]
+      </a> (frames 50-98)
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align:top">
       <ul>
         <li> "Good" scaling - seems to grow + shrink
         <li> angleScale: .5 scale = -.5; 1.5 scale = .5
@@ -364,56 +386,55 @@ angleScale formula, the exact value need to achieve this varies in each case.
       </ul>
     </td>
     <td style="vertical-align:top">
-      <video controls loop>
-        <source src="https://github.com/pmolodo/luxtest_renders/raw/refs/heads/main/iesUp-karma.mp4" type="video/mp4">
-        Your browser does not support displaying this video.
-      </video>
-      <p>
-      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
-        [usda (frames 50-98)]
-      </a>
-      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
-        [ies]
-      </a>
       <ul>
         <li> "Bad" scaling - bands are created + disappear, large dead area at center when scaling up
         <li> angleScale: .5 scale = -0.142857; 1.5 scale = 0.166667
       </ul>
     </td>
-  </tr>
   <tr>
-    <td>Down</td>
+    <td rowspan="2">Down</td>
     <td style="vertical-align:top">
-      <video controls loop>
-        <source src="https://github.com/pmolodo/luxtest_renders/raw/refs/heads/main/iesDown-ris.mp4" type="video/mp4">
+      <video controls loop src="https://github.com/user-attachments/assets/f915a1b4-a38e-4d8a-9a60-6227f9e3cf7d" type="video/mp4" height="200">
         Your browser does not support displaying this video.
       </video>
-      <p>
-      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
-        [usda (frames 1-49)]
+      <br>
+      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/iesDown-ris.mp4">
+        [mp4]
       </a>
-      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimDown.ies">
         [ies]
       </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesDown.usda">
+        [usda]
+      </a> (frames 1-49)
+    </td>
+    <td style="vertical-align:top">
+      <video controls loop src="https://github.com/user-attachments/assets/81fcecde-3d28-4e2a-86bf-fee77434968c" type="video/mp4" height="200">
+        Your browser does not support displaying this video.
+      </video>
+      <br>
+      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/iesDown-karma.mp4">
+        [mp4]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimDown.ies">
+        [ies]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesDown.usda">
+        [usda]
+      </a> (frames 50-98)
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align:top">
       <ul>
         <li> "Bad" scaling - bands are created + disappear, large dead area at center when scaling up
         <li> angleScale: .5 scale = 0.166667; 1.5 scale =-0.166667
         <li> Please disregard the "blurry" rendering - I'm trying to resolve
              <a href="https://renderman.pixar.com/forum/showthread.php?s=&postid=269779">this issue with RenderMan</a>
         </li>
-      </ul>    </td>
+      </ul>
+    </td>
     <td style="vertical-align:top">
-      <video controls loop>
-        <source src="https://github.com/pmolodo/luxtest_renders/raw/refs/heads/main/iesDown-karma.mp4" type="video/mp4">
-        Your browser does not support displaying this video.
-      </video>
-      <p>
-      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
-        [usda (frames 50-98)]
-      </a>
-      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
-        [ies]
-      </a>
       <ul>
         <li> "Good" scaling - seems to grow + shrink
         <li> angleScale: .5 scale = .5; 1.5 scale =-0.333333
@@ -421,7 +442,6 @@ angleScale formula, the exact value need to achieve this varies in each case.
     </td>
   </tr>
 </table>
-
 
 #### Which is more common - spotlights aimed up or down?
 
