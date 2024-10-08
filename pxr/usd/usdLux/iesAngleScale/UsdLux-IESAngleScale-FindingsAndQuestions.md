@@ -225,7 +225,7 @@ $$ \theta_{ies} = \frac{\theta_{light} - \pi}{1 + angleScale} + \pi $$
 
 ...which can be rewritten as:
 
-$$ (\theta_{ies} - \pi)\, (1 + angleScale) = (\theta_{light} - \pi) $$
+$$ (\theta_{ies} - \pi)\ (1 + angleScale) = (\theta_{light} - \pi) $$
 
 ...from which we can see that the relation is a simple scale by
 $(1 + angleScale)$, offset so the scale origin is at $(\theta_{light},\ \theta_{ies}) = (\pi,\ \pi)$.
@@ -253,7 +253,7 @@ $$
 \theta_{ies} =
 \begin{dcases}
     \frac{\theta_{light}}{1 - angleScale},  & \text{if} \quad 0 < angleScale < 1 \\
-    \theta_{light} \, (1 + angleScale),     & \text{if} \quad -1 < angleScale < 0   \\
+    \theta_{light} \ (1 + angleScale),     & \text{if} \quad -1 < angleScale < 0   \\
     0,                                      & \text{otherwise}    \\
 \end{dcases}
 $$
