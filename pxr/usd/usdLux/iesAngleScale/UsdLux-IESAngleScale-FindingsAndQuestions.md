@@ -509,8 +509,8 @@ $$
 
 Pros:
 - Can give "good" scaling with lights aimed either up OR down
-  - Use positive values for lights aimed up
-  - Use negative values for lights aimed down
+  - Use positive values for lights aimed down (most common)
+  - Use negative values for lights aimed up
 - Requires no additional attributes
 - Provides a backwards-compatible mapping for either RenderMan or Karma
 
