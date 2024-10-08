@@ -488,7 +488,7 @@ Unfortunately, I don't think either option is a clear winner, mostly because:
 ## Alternative Formulas
 
 Given that bot the RenderMan and Karma formulas have significant drawbacks,
-here are 3 proposals for alternative formulas:
+here are some proposals for alternative formulas:
 
 ### A. Bimodal - Scaling Origin at 0° for angleScale > 0, 180° for angleScale < 0
 
@@ -522,128 +522,36 @@ Cons:
 - Requires user to figure out whether they should use negative or positive
   values to get "good" scaling for their light
 
-### B. Add `vAngleScaleCenter` attribute
+### B. Add other attributes
 
-**New Attributes:** (exact names TBD)
-- `float inputs:shaping:ies:vAngleScaleCenter = 0`
-  - Valid Range: $[0, 180]$
-  - Units: degrees
+If we're open to adding new attributes, we could allow precise control over
+the scaling origin, potentially allow scaling even from horizontally-aimed
+lights, and (possibly) make the formula seem a little less "black box" /
+obscure.
 
-By adding one additional attribute, we could allow setting any vertical angle
-as the scale origin, providing a clearer way to support lights aimed
-either up or down, as well as "partial" support for a light aimed in any
-direction (ie, we can locate the scaling origin in the correct place, but the
-scaling for lights aimed sideways will be distorted, since we still only alter
-the  verticalAngle / $\theta$, and leave the horizontalAngle / $\phi$
-untouched.)
+Options might include:
 
-**Mathematical Description:**
+- Adding a `vAngleScaleType` attributes
+  - Be an eumerated attribute that would allow choosing from fixed number of
+    behaviors - ie, scaling origin at top (RenderMan style) or bottom (Karma
+    style)
+  - Or could have an "auto" setting that attempts to calculate a primary light
+    direction
+  - Could provide some future proofing, by adding new allowed values
+- Adding a `vAngleScaleCenter` attribute
+  - Would allow scaling from bottom (by setting to 0°) or top (by setting to
+    180°)
+  - By itself, could allow "distorted" scaling of sideways-aimed lights (ie,
+    by still only scaling the vertical angle, and leaving horizontal angle
+    unaltered)
+- Adding a `hAngleScaleCenter` attribute
+  - If combined with a `vAngleScaleCenter`, would allow radial scaling for
+    any ies light
 
-$$
-\theta_{ies} =
-    \frac{\theta_{light} - vAngleScaleCenter}{angleScale} + vAngleScaleCenter
-$$
+While these would enable more control, they would also introduce various levels
+of additional complexity, and require more modification to the schema... and
+there may not be much demand for this level of control.
 
-Pros:
-- Can give "good" scaling with lights aimed either up OR down
-- Provides a backwards-compatible mapping for either RenderMan or Karma
-- Provides an "easy" path to later supporting "any" aim direction in the future
-  (by adding `hAngleScaleCenter` and `angleScaleDirection` - see
-  [Option C][option_C])
-
-Cons:
-- Requires 1 additional attribute
-- Requires setting an additional attribute to get "good" scaling for a given
-  light
-- Sort-of supports lights aimed to side - can center the vertical original, but
-  horizontal mapping is not affected, so lights aimed to side will get
-  "stretched" in vertical direction - ie, a circular spotlight will become an
-  oval
-
-Notes:
-- In the future, we could possibly allow "auto-dectection" of
-  `vAngleScaleCenter` by, ie, setting `vAngleScaleCenter = -1`
-
-### C. Add `vAngleScaleCenter`, `hAngleScaleCenter`, and `angleScaleDirection` attributes
-
-**New Attributes:** (exact names TBD)
-
-- `float inputs:shaping:ies:vAngleScaleCenter = 0`
-  - Valid Range: $[0, 180]$
-  - Units: degrees
-- `float inputs:shaping:ies:hAngleScaleCenter = 0`
-  - Valid Range: $[0, 360]$
-  - Units: degrees
-- `token inputs:shaping:ies:angleScaleDirection = "radial"`
-  - Valid Values: ["vertical", "radial"]
-
-By setting `angleScaleDirection` to `radial`, we would remap BOTH vertical
-angles and horizontal angles, to allow circular profile scaling about any
-aribtrary direction, and "intuitive" profile scaling for any type of spotlight
-(by setting `vAngleScaleCenter` and `hAngleScaleOrign` to align with the
-profile's "primary" axis).  The inclusion of `angleScaleDirection` as an option
-allows a backwards-compatible mapping to existing behavior by setting it to
-`vertical` - the attribute could be dropped if we don't care about maintaining a
-backwards-compatible mapping.
-
-**Mathematical Description:**
-
-#### If `angleScaleDirection = "vertical"`:
-- then `hAngleScaleCenter` is ignored, and the formula is the same as in
-  [Option B][option_b] above.
-
-#### If `angleScaleDirection = "radial"`:
-
-- Then let $R$ represent the shortest-angle rotation of the
-  $(vScaleOrigin, hScaleOrigin)$ direction to align with the the
-  $\theta = 0$ axis, where $(\theta',\ \phi')$ is the image of
-  $(\theta,\ \phi)$ after this rotation:
-
-$$
-    R(\theta,\ \phi) \rightarrow (\theta',\ \phi')
-$$
-
-- To translate from $(\theta_{light}, \phi_{light})$ to
-  $(\theta_{ies}, \phi_{ies})$, we first perform a rotation by $R$
-
-$$ (\theta_{light}',\ \phi_{light}') = R(\theta_{light},\ \phi_{light}) $$
-
-- Scale the $\theta'$ coordinate by `angleScale`:
-
-$$
-\begin{align*}
-    \theta_{ies}' &= \frac{\theta_{light}'}{angleScale} \\
-    \phi_{ies}' &= \phi_{light}'                        \\
-\end{align*}
-$$
-
-- Then inverse rotate by $R^{-1}$ to get back to our original spherical
-  coordinate system:
-
-$$ (\theta_{ies},\ \phi_{ies}) = R^{-1}(\theta_{ies}',\ \phi_{ies}') $$
-
-Pros:
-- can work "intuitively" with lights aimed in ANY direction
-- provides a backwards-compatible mapping for either RenderMan or Karma
-- can provide a possible upgrade path from [Option B][option_b], allowing an
-  incremental upgrade path that we can follow only if there is demand
-
-Cons:
-- Requires 3 additional attributes
-- Most complex, and likely only useful for a relatively small number of lights
-  (ie, ones aimed sideways)
-
-### Comparison of A / B / C
-
-| Feature                                                      | A (Bimodal)         | B (vAngle Attr) | C (vangle + hAngle Attrs) |
-| ------------------------------------------------------------ | ------------------- | --------------- | ------------------------- |
-| Required additional attributes                               | 0                   | 1               | 3                         |
-| Allows "intuitive" scaling for spotlight aimed up OR down    | Yes                 | Yes             | Yes                       |
-| Allows "intuitive" scaling for spotlights aimed anywhere     | No                  | Distorted       | ***Yes***                 |
-| Useable domain (angleScale)                                  | $(-\infty, \infty)$ | $[0, \infty)$   | $[0, \infty)$             |
-| Relation between angleScale and scaling control  | <ul><li>Negative: scale origin top<li>Positive: scale origin bottom<li>Abs < 1: narrower<li>Abs > 1: broader</ul> | <ul><li>< 1: narrower<li>> 1: broader</ul> | <ul><li>< 1: narrower<li>> 1: broader</ul> || Same formula for entire domain?                              | No                  | ***Yes***       | ***Yes***                 |
-| Allows backwards-compatible mapping for RenderMan and Karma? | Yes                 | Yes             | Yes                       |
-| Path to support spotlights aimed anywhere                    | Unknown             | Migrate to C    | Already Supported         |
 
 
 <!-- ################################ -->
