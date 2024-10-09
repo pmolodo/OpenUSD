@@ -514,6 +514,18 @@ Pros:
 - Requires no additional attributes
 - Provides a backwards-compatible mapping for either RenderMan or Karma
 
+$$
+\begin{align*}
+    \text{RenderMan:} &  \quad angleScale_{new} = - (1 + angleScale_{old_R}) \\
+
+        \text{Karma:} &  \quad angleScale_{new} = \begin{dcases}
+            1 -  angleScale_{old_K} & \text{if} \quad 0 < angleScale_{old_K} < 1 \\
+            \frac{1}{1 + angleScale_{old_K}} & \text{if} \quad -1 < angleScale_{old_K} < 0   \\
+        \end{dcases}
+\end{align*} \\
+$$
+
+
 Cons:
 - Doesn't give "good" scaling with ALL lights (ie, lights aimed to the side)
 - ...nor does it provide a clear path to supporting any aim direction in the
