@@ -485,7 +485,7 @@ Unfortunately, I don't think either option is a clear winner, mostly because:
   mapping from "old" values to "new" values that will result in unaltered
   behavior for existing scenes.
 
-## Alternative Formulas
+## Alternatives
 
 Given that bot the RenderMan and Karma formulas have significant drawbacks,
 here are some proposals for alternative formulas:
