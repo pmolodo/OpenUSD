@@ -513,17 +513,20 @@ Pros:
   - Use negative values for lights aimed up
 - Requires no additional attributes
 - Provides a backwards-compatible mapping for either RenderMan or Karma
+  - Renderman:
 
-$$
-\begin{align*}
-    \text{RenderMan:} &  \quad angleScale_{new} = - (1 + angleScale_{old_R}) \\
+    $$
+        angleScale_{new} = - (1 + angleScale_{old_R})
+    $$
 
-        \text{Karma:} &  \quad angleScale_{new} = \begin{dcases}
+  - Karma:
+
+    $$
+        angleScale_{new} = \begin{dcases}
             1 -  angleScale_{old_K} & \text{if} \quad 0 < angleScale_{old_K} < 1 \\
             \frac{1}{1 + angleScale_{old_K}} & \text{if} \quad -1 < angleScale_{old_K} < 0   \\
         \end{dcases}
-\end{align*} \\
-$$
+    $$
 
 
 Cons:
