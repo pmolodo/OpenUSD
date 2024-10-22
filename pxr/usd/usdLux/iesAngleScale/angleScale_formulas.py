@@ -51,11 +51,25 @@ THETA_MIN_MAX = (0, THETA_MAX)
 ANGLESCALE_MIN_MAX = (-1, 1)
 
 @dataclasses.dataclass(frozen=True)
+class ViewAngles:
+    elev: Optional[float] = None
+    azim: Optional[float] = None
+    roll: Optional[float] = None
+
+    def is_null(self):
+        return self.elev is None and self.azim is None and self.roll is None
+
+    def set_on_axes(self, axes):
+        if self.is_null():
+            return
+        axes.view_init(elev=self.elev, azim=self.azim, roll=self.roll)
+
+@dataclasses.dataclass(frozen=True)
 class GraphOptions:
     theta_min_max: Tuple[float, float] = THETA_MIN_MAX
     angleScale_min_max: Tuple[float, float] = ANGLESCALE_MIN_MAX
     axis_size_scales: Tuple[float, float, float] = (1, 1, 1)
-    view_angles: Optional[Tuple[float, float, float]] = None
+    view_angles: ViewAngles = ViewAngles()
 
     def set_on_graph(self, graph):
         return self.set_on_axes(graph.ax)
@@ -76,6 +90,8 @@ class GraphOptions:
 
         if self.axis_size_scales != (1, 1, 1):
             set_axis_size_scales(axes, self.axis_size_scales)
+
+        self.view_angles.set_on_axes(axes)
 
     def theta_lim(self):
         return (theta,) + self.theta_min_max
@@ -227,7 +243,7 @@ bimodal_neg_clamp = Clamp(bimodal_neg, 0, THETA_MAX)
 bimodal = sympy.Piecewise((bimodal_pos, angleScale > 0), (bimodal_neg, angleScale < 0), (theta, True))
 bimodal_clamp = Clamp(bimodal, 0, THETA_MAX)
 
-bimodal_options = GraphOptions(angleScale_min_max=(-2, 2), axis_size_scales=(1, 2, 1))
+bimodal_options = GraphOptions(angleScale_min_max=(-2, 2), axis_size_scales=(1, 2, 1), view_angles=ViewAngles(azim=25, elev=35))
 bimodal_clamp_graph = plot3d_and_save(bimodal_clamp, "Bimodal (clamped)", slices=False, graph_options=bimodal_options)
 
 if INTERACTIVE_VIEW:
