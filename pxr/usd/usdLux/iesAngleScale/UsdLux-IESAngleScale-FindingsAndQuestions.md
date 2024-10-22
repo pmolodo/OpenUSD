@@ -502,6 +502,10 @@ $$
 \begin{dcases}
     \frac{\theta_{light}}{angleScale},
         & \text{if} \quad angleScale > 0 \\
+    \\
+    \theta_{light}
+        & \text{if} \quad angleScale = 0 \\
+    \\
     \frac{\theta_{light} - \pi}{-angleScale} + \pi,
         & \text{if} \quad angleScale < 0   \\
 \end{dcases}
