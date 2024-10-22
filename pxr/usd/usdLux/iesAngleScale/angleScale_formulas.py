@@ -68,13 +68,11 @@ class ViewAngles:
 class GraphOptions:
     theta_min_max: Tuple[float, float] = THETA_MIN_MAX
     angleScale_min_max: Tuple[float, float] = ANGLESCALE_MIN_MAX
-    axis_size_scales: Tuple[float, float, float] = (1, 1, 1)
+    box_aspect: Tuple[float, float, float] = (1, 1, 1)
     view_angles: ViewAngles = ViewAngles()
 
     def set_on_graph(self, graph):
-        return self.set_on_axes(graph.ax)
-
-    def set_on_axes(self, axes):
+        axes = graph.ax
         if not "theta" in axes.get_xlabel():
             raise ValueError("expected x-axis to be theta")
 
@@ -88,8 +86,8 @@ class GraphOptions:
             axes.set_ylim(*self.theta_min_max)
             axes.set_ylabel(THETA_OUTPUT_LABEL)
 
-        if self.axis_size_scales != (1, 1, 1):
-            set_axis_size_scales(axes, self.axis_size_scales)
+        if self.box_aspect != (1, 1, 1):
+            axes.set_box_aspect(self.box_aspect)
 
         self.view_angles.set_on_axes(axes)
 
@@ -132,20 +130,6 @@ def save_graph(graph, filename, dpi=300):
     graph.fig.savefig(filepath, dpi=dpi)
 
 
-def set_axis_size_scales(axes, axis_size_scales: Tuple[float, float, float]):
-    from mpl_toolkits.mplot3d.axes3d import Axes3D
-
-    max_scale = max(axis_size_scales)
-    diagonal = numpy.array(axis_size_scales) / max_scale
-    diagonal = numpy.insert(diagonal, 3, 1.0)
-    scale = numpy.diag(diagonal)
-
-    def scaled_projection():
-        return numpy.dot(Axes3D.get_proj(axes), scale)
-
-    axes.get_proj = scaled_projection
-
-
 def save_graph_slices(function, title, filename, graph_options=DEFAULT_GRAPH):
     for i in range(-100, 101, 25):
         angleScale_val = i / 100
@@ -159,8 +143,8 @@ def save_graph_slices(function, title, filename, graph_options=DEFAULT_GRAPH):
             for x in slice_func.atoms()
         ):
             del graph.series[0]
+            graph_options.set_on_graph(graph)
             axes = graph.ax
-            graph_options.set_on_axes(axes)
             x_center = sum(axes.get_xlim()) / 2
             y_center = sum(axes.get_ylim()) / 2
             axes.text(
@@ -243,8 +227,17 @@ bimodal_neg_clamp = Clamp(bimodal_neg, 0, THETA_MAX)
 bimodal = sympy.Piecewise((bimodal_pos, angleScale > 0), (bimodal_neg, angleScale < 0), (theta, True))
 bimodal_clamp = Clamp(bimodal, 0, THETA_MAX)
 
-bimodal_options = GraphOptions(angleScale_min_max=(-2, 2), axis_size_scales=(1, 2, 1), view_angles=ViewAngles(azim=25, elev=35))
-bimodal_clamp_graph = plot3d_and_save(bimodal_clamp, "Bimodal (clamped)", slices=False, graph_options=bimodal_options)
+bimodal_options = GraphOptions(
+    angleScale_min_max=(-2, 2),
+    box_aspect=(1, 2, 1),
+    view_angles=ViewAngles(azim=25.97402597402598, elev=42.792207792207805))
+
+bimodal_clamp_graph = plot3d_and_save(
+    bimodal_clamp,
+    "Bimodal (clamped)",
+    slices=False,
+    graph_options=bimodal_options,
+)
 
 if INTERACTIVE_VIEW:
     plt.show()
