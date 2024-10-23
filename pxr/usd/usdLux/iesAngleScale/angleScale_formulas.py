@@ -62,14 +62,20 @@ class ViewAngles:
     def set_on_axes(self, axes):
         if self.is_null():
             return
+        if not hasattr(axes, "view_init"):
+            return
         axes.view_init(elev=self.elev, azim=self.azim, roll=self.roll)
+
+BIMODAL_VIEW_ANGLE = ViewAngles(azim=25.97402597402598, elev=42.792207792207805)
+DEFAULT_VIEW_ANGLE = ViewAngles()
+
 
 @dataclasses.dataclass(frozen=True)
 class GraphOptions:
     theta_min_max: Tuple[float, float] = THETA_MIN_MAX
     angleScale_min_max: Tuple[float, float] = ANGLESCALE_MIN_MAX
     box_aspect: Tuple[float, float, float] = (1, 1, 1)
-    view_angles: ViewAngles = ViewAngles()
+    view_angles: ViewAngles = DEFAULT_VIEW_ANGLE
 
     def set_on_graph(self, graph):
         axes = graph.ax
@@ -82,12 +88,16 @@ class GraphOptions:
             axes.set_ylim(*self.angleScale_min_max)
             axes.set_zlim(*self.theta_min_max)
             axes.set_zlabel(THETA_OUTPUT_LABEL)
+            if self.box_aspect != (1, 1, 1):
+                print(f"{self.box_aspect=}")
+                axes.set_box_aspect(self.box_aspect)
         else:
             axes.set_ylim(*self.theta_min_max)
             axes.set_ylabel(THETA_OUTPUT_LABEL)
-
-        if self.box_aspect != (1, 1, 1):
-            axes.set_box_aspect(self.box_aspect)
+            aspect = (self.box_aspect[0], self.box_aspect[2])
+            if aspect != (1, 1):
+                aspectRatio = aspect[1] / aspect[0]
+                axes.set_aspect(aspectRatio)
 
         self.view_angles.set_on_axes(axes)
 
@@ -97,20 +107,13 @@ class GraphOptions:
     def angleScale_lim(self):
         return (angleScale,) + self.angleScale_min_max
 
-    def make_graph(self, function, title):
-        num_symbols = len(function.free_symbols)
-        if num_symbols == 1:
-            is3d = False
-        elif num_symbols == 2:
-            is3d = True
-        else:
-            raise ValueError(num_symbols)
+    def make_graph2d(self, function, title):
+        graph = spb.plot(function, self.theta_lim(), show=False, title=title)
+        self.set_on_graph(graph)
+        return graph
 
-        if is3d:
-            graph = spb.plot3d(function, self.theta_lim(), self.angleScale_lim(), show=False, title=title)
-        else:
-            graph = spb.plot(function, self.theta_lim(), show=False, title=title)
-
+    def make_graph3d(self, function, title):
+        graph = spb.plot3d(function, self.theta_lim(), self.angleScale_lim(), show=False, title=title)
         self.set_on_graph(graph)
         return graph
 
@@ -130,14 +133,17 @@ def save_graph(graph, filename, dpi=300):
     graph.fig.savefig(filepath, dpi=dpi)
 
 
-def save_graph_slices(function, title, filename, graph_options=DEFAULT_GRAPH):
-    for i in range(-100, 101, 25):
-        angleScale_val = i / 100
+def save_graph_slices(function, title, filename, num_slices, graph_options=DEFAULT_GRAPH):
+    start, end = graph_options.angleScale_min_max
+    dist = end - start
+    step = dist / (num_slices - 1)
+    for i in range(num_slices):
+        angleScale_val = round((i * step) + start, 6)
         angleScale_str = f"{angleScale_val:+.02f}"
         title_i = f"{title} (angleScale = {angleScale_str})"
         filename_i = f"{filename}_{angleScale_str}"
         slice_func = function.subs(angleScale, angleScale_val)
-        graph = graph_options.make_graph(slice_func, title=title_i)
+        graph = graph_options.make_graph2d(slice_func, title=title_i)
         if any(
             isinstance(x, sympy.core.numbers.ComplexInfinity)
             for x in slice_func.atoms()
@@ -161,8 +167,8 @@ def save_graph_slices(function, title, filename, graph_options=DEFAULT_GRAPH):
         plt.close(graph.fig)
 
 
-def plot3d_and_save(function, title, slices=False, graph_options=DEFAULT_GRAPH):
-    graph = graph_options.make_graph(function, title=title)
+def plot3d_and_save(function, title, slices=0, graph_options=DEFAULT_GRAPH):
+    graph = graph_options.make_graph3d(function, title=title)
     filename = f"ies_angleScale_{title}"
     filename = filename.replace(" - ", "-")
     filename = filename.replace("/", "over")
@@ -172,7 +178,7 @@ def plot3d_and_save(function, title, slices=False, graph_options=DEFAULT_GRAPH):
 
     save_graph(graph, filename)
     if slices:
-        save_graph_slices(function, title, filename, graph_options=graph_options)
+        save_graph_slices(function, title, filename, num_slices=slices, graph_options=graph_options)
     return graph
 
 
@@ -199,8 +205,7 @@ karma_pos_clamp = Clamp(
 
 # karma_graph = plot3d_and_save(karma, "Karma (unclamped)")
 
-# karma_clamp_graph = plot3d_and_save(karma_clamp, "Karma (clamped)", slices=True)
-# save_graph_slices(karma_clamp, "ies_angleScale_karma_clamped")
+karma_clamp_graph = plot3d_and_save(karma_clamp, "Karma (clamped)", slices=9)
 
 # karma_pos_clamp_graph = plot3d_and_save(
 #     karma_pos_clamp, "Karma - theta / (1-angleScale) only (clamped)"
@@ -212,7 +217,7 @@ rman_clamp = Clamp(sympy.Piecewise((rman, angleScale > -1), (0, True)), 0, THETA
 
 # rman_graph = plot3d_and_save(rman, "Renderman (unclamped)")
 
-# rman_clamp_graph = plot3d_and_save(rman_clamp, "Renderman (clamped)", slices=True)
+rman_clamp_graph = plot3d_and_save(rman_clamp, "Renderman (clamped)", slices=9)
 
 
 # if angleScale > 0, scale origin is at bottom (vangle=0)
@@ -222,20 +227,21 @@ rman_clamp = Clamp(sympy.Piecewise((rman, angleScale > -1), (0, True)), 0, THETA
 bimodal_pos = theta / angleScale
 bimodal_neg = ((theta - THETA_MAX) / -angleScale) + THETA_MAX
 bimodal_neg_clamp = Clamp(bimodal_neg, 0, THETA_MAX)
-# bimodal_neg_clamp_graph = plot3d_and_save(bimodal_neg_clamp, "Bimodal Neg (Clamped)", slices=False, angleScale_min_max=(-1, 0))
+# bimodal_neg_clamp_graph = plot3d_and_save(bimodal_neg_clamp, "Bimodal Neg (Clamped)", slices=9, angleScale_min_max=(-1, 0))
 
 bimodal = sympy.Piecewise((bimodal_pos, angleScale > 0), (bimodal_neg, angleScale < 0), (theta, True))
 bimodal_clamp = Clamp(bimodal, 0, THETA_MAX)
 
+
 bimodal_options = GraphOptions(
     angleScale_min_max=(-2, 2),
-    box_aspect=(1, 2, 1),
-    view_angles=ViewAngles(azim=25.97402597402598, elev=42.792207792207805))
+    box_aspect=(4, 8, 3),
+    view_angles=BIMODAL_VIEW_ANGLE)
 
 bimodal_clamp_graph = plot3d_and_save(
     bimodal_clamp,
     "Bimodal (clamped)",
-    slices=False,
+    slices=17,
     graph_options=bimodal_options,
 )
 
