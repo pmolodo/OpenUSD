@@ -665,7 +665,11 @@ class "ShapingAPI" (
 
         Applies a scaling factor to the latitudinal theta/vertical polar
         coordinate before sampling the ies profile, to shift the samples more
-        toward the \"top\" or \"bottom\" of the profile. The scaling origin is
+        toward the \"top\" or \"bottom\" of the profile. 
+
+
+        < TODO - fix for BiModal formula>
+        The scaling origin is
         centered at theta = pi / 180 degrees, so theta = pi is always unaltered,
         regardless of the angleScale.  The scaling amount is `1 + angleScale`.
         This has the effect that negative values (greater than -1.0) decrease
