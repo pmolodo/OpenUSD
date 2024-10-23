@@ -682,16 +682,6 @@ there may not be much demand for this level of control.
 
 <!--     angleScale formula graph images -->
 
-[Ka-1.0_gph]: ies_angleScale_Karma_clamped_-1.00.jpg
-[Ka-.75_gph]: ies_angleScale_Karma_clamped_-0.75.jpg
-[Ka-.50_gph]: ies_angleScale_Karma_clamped_-0.50.jpg
-[Ka-.25_gph]: ies_angleScale_Karma_clamped_-0.25.jpg
-[Ka=0.0_gph]: ies_angleScale_Karma_clamped_+0.00.jpg
-[Ka+.25_gph]: ies_angleScale_Karma_clamped_+0.25.jpg
-[Ka+.50_gph]: ies_angleScale_Karma_clamped_+0.50.jpg
-[Ka+.75_gph]: ies_angleScale_Karma_clamped_+0.75.jpg
-[Ka+1.0_gph]: ies_angleScale_Karma_clamped_+1.00.jpg
-
 [RM-1.0_gph]: ies_angleScale_Renderman_clamped_-1.00.jpg
 [RM-.75_gph]: ies_angleScale_Renderman_clamped_-0.75.jpg
 [RM-.50_gph]: ies_angleScale_Renderman_clamped_-0.50.jpg
@@ -701,3 +691,13 @@ there may not be much demand for this level of control.
 [RM+.50_gph]: ies_angleScale_Renderman_clamped_+0.50.jpg
 [RM+.75_gph]: ies_angleScale_Renderman_clamped_+0.75.jpg
 [RM+1.0_gph]: ies_angleScale_Renderman_clamped_+1.00.jpg
+
+[Ka-1.0_gph]: ies_angleScale_Karma_clamped_-1.00.jpg
+[Ka-.75_gph]: ies_angleScale_Karma_clamped_-0.75.jpg
+[Ka-.50_gph]: ies_angleScale_Karma_clamped_-0.50.jpg
+[Ka-.25_gph]: ies_angleScale_Karma_clamped_-0.25.jpg
+[Ka=0.0_gph]: ies_angleScale_Karma_clamped_+0.00.jpg
+[Ka+.25_gph]: ies_angleScale_Karma_clamped_+0.25.jpg
+[Ka+.50_gph]: ies_angleScale_Karma_clamped_+0.50.jpg
+[Ka+.75_gph]: ies_angleScale_Karma_clamped_+0.75.jpg
+[Ka+1.0_gph]: ies_angleScale_Karma_clamped_+1.00.jpg
