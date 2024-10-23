@@ -237,9 +237,9 @@ $(1 + angleScale)$, offset so the scale origin is at $(\theta_{light},\ \theta_{
 
 | -1.00         | -0.75         | -0.50         | -0.25         | =0.00         | +0.25         | +0.50         | +0.75         | +1.00         |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| ![RM-1.0_pre] | ![RM-.75_pre] | ![RM-.50_pre] | ![RM-.25_pre] | ![RM=0.0_pre] | ![RM+.25_pre] | ![RM+.50_pre] | ![RM+.75_pre] | ![RM+1.0_pre] |
-| ![RM-1.0_tst] | ![RM-.75_tst] | ![RM-.50_tst] | ![RM-.25_tst] | ![RM=0.0_tst] | ![RM+.25_tst] | ![RM+.50_tst] | ![RM+.75_tst] | ![RM+1.0_tst] |
-| ![RM-1.0_gph] | ![RM-.75_gph] | ![RM-.50_gph] | ![RM-.25_gph] | ![RM=0.0_gph] | ![RM+.25_gph] | ![RM+.50_gph] | ![RM+.75_gph] | ![RM+1.0_gph] |
+| ![RM-1.00_pre] | ![RM-0.75_pre] | ![RM-0.50_pre] | ![RM-0.25_pre] | ![RM=0.00_pre] | ![RM+0.25_pre] | ![RM+0.50_pre] | ![RM+0.75_pre] | ![RM+1.00_pre] |
+| ![RM-1.00_tst] | ![RM-0.75_tst] | ![RM-0.50_tst] | ![RM-0.25_tst] | ![RM=0.00_tst] | ![RM+0.25_tst] | ![RM+0.50_tst] | ![RM+0.75_tst] | ![RM+1.00_tst] |
+| ![RM-1.00_gph] | ![RM-0.75_gph] | ![RM-0.50_gph] | ![RM-0.25_gph] | ![RM=0.00_gph] | ![RM+0.25_gph] | ![RM+0.50_gph] | ![RM+0.75_gph] | ![RM+1.00_gph] |
 
 
 -----------------------
@@ -270,9 +270,9 @@ $(\theta_{light},\ \theta_{ies}) = (0,\ 0)$:
 
 | -1.00         | -0.75         | -0.50         | -0.25         | =0.00         | +0.25         | +0.50         | +0.75         | +1.00         |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| ![Ka-1.0_pre] | ![Ka-.75_pre] | ![Ka-.50_pre] | ![Ka-.25_pre] | ![Ka=0.0_pre] | ![Ka+.25_pre] | ![Ka+.50_pre] | ![Ka+.75_pre] | ![Ka+1.0_pre] |
-| ![Ka-1.0_tst] | ![Ka-.75_tst] | ![Ka-.50_tst] | ![Ka-.25_tst] | ![Ka=0.0_tst] | ![Ka+.25_tst] | ![Ka+.50_tst] | ![Ka+.75_tst] | ![Ka+1.0_tst] |
-| ![Ka-1.0_gph] | ![Ka-.75_gph] | ![Ka-.50_gph] | ![Ka-.25_gph] | ![Ka=0.0_gph] | ![Ka+.25_gph] | ![Ka+.50_gph] | ![Ka+.75_gph] | ![Ka+1.0_gph] |
+| ![Ka-1.00_pre] | ![Ka-0.75_pre] | ![Ka-0.50_pre] | ![Ka-0.25_pre] | ![Ka=0.00_pre] | ![Ka+0.25_pre] | ![Ka+0.50_pre] | ![Ka+0.75_pre] | ![Ka+1.00_pre] |
+| ![Ka-1.00_tst] | ![Ka-0.75_tst] | ![Ka-0.50_tst] | ![Ka-0.25_tst] | ![Ka=0.00_tst] | ![Ka+0.25_tst] | ![Ka+0.50_tst] | ![Ka+0.75_tst] | ![Ka+1.00_tst] |
+| ![Ka-1.00_gph] | ![Ka-0.75_gph] | ![Ka-0.50_gph] | ![Ka-0.25_gph] | ![Ka=0.00_gph] | ![Ka+0.25_gph] | ![Ka+0.50_gph] | ![Ka+0.75_gph] | ![Ka+1.00_gph] |
 
 -----------------------
 
@@ -511,6 +511,19 @@ $$
 \end{dcases}
 $$
 
+![ies_angleScale_bimodal_clamped.jpg](ies_angleScale_bimodal_clamped.jpg)
+
+#### Bimodal: ies:angleScale from -2 to -2
+
+
+| -2.00         | -1.50         | -1.00         | -0.50         | =0.00         | +0.50         | +1.00         | +1.50         | +2.00         |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| ![Bi-2.00_pre] | ![Bi-1.50_pre] | ![Bi-1.00_pre] | ![Bi-0.50_pre] | ![Bi=0.00_pre] | ![Bi+0.50_pre] | ![Bi+1.00_pre] | ![Bi+1.50_pre] | ![Bi+2.00_pre] |
+| ![Bi-2.00_tst] | ![Bi-1.50_tst] | ![Bi-1.00_tst] | ![Bi-0.50_tst] | ![Bi=0.00_tst] | ![Bi+0.50_tst] | ![Bi+1.00_tst] | ![Bi+1.50_tst] | ![Bi+2.00_tst] |
+| ![Bi-2.00_gph] | ![Bi-1.50_gph] | ![Bi-1.00_gph] | ![Bi-0.50_gph] | ![Bi=0.00_gph] | ![Bi+0.50_gph] | ![Bi+1.00_gph] | ![Bi+1.50_gph] | ![Bi+2.00_gph] |
+
+
+
 Pros:
 - Can give "good" scaling with lights aimed either up OR down
   - Use positive values for lights aimed down (most common)
@@ -603,101 +616,149 @@ there may not be much demand for this level of control.
 [up_light]: https://ieslibrary.com/ies/BEGA/0184e55f1f5ef8ee9e8b006d6a7bf558.jpg
 
 <!--     iesTest render images -->
-[RM-1.0_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0012.png
+[RM-1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0012.png
     'RIS -1.00 angleScale'
-[RM-.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0013.png
+[RM-0.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0013.png
     'RIS -0.75 angleScale'
-[RM-.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0014.png
+[RM-0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0014.png
     'RIS -0.50 angleScale'
-[RM-.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0015.png
+[RM-0.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0015.png
     'RIS -0.25 angleScale'
-[RM=0.0_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0016.png
+[RM=0.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0016.png
     'RIS =0.00 angleScale'
-[RM+.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0017.png
+[RM+0.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0017.png
     'RIS +0.25 angleScale'
-[RM+.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0018.png
+[RM+0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0018.png
     'RIS +0.50 angleScale'
-[RM+.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0019.png
+[RM+0.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0019.png
     'RIS +0.75 angleScale'
-[RM+1.0_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0020.png
+[RM+1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0020.png
     'RIS +1.00 angleScale'
 
-[Ka-1.0_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0012.png
+[Ka-1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0012.png
     'Karma -1.00 angleScale'
-[Ka-.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0013.png
+[Ka-0.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0013.png
     'Karma -0.75 angleScale'
-[Ka-.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0014.png
+[Ka-0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0014.png
     'Karma -0.50 angleScale'
-[Ka-.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0015.png
+[Ka-0.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0015.png
     'Karma -0.25 angleScale'
-[Ka=0.0_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0016.png
+[Ka=0.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0016.png
     'Karma =0.00 angleScale'
-[Ka+.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0017.png
+[Ka+0.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0017.png
     'Karma +0.25 angleScale'
-[Ka+.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0018.png
+[Ka+0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0018.png
     'Karma +0.50 angleScale'
-[Ka+.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0019.png
+[Ka+0.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0019.png
     'Karma +0.75 angleScale'
-[Ka+1.0_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0020.png
+[Ka+1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0020.png
     'Karma +1.00 angleScale'
+
+[Bi-2.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0012.png
+    'Bimodal -2.00 angleScale'
+[Bi-1.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0013.png
+    'Bimodal -1.50 angleScale'
+[Bi-1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0014.png
+    'Bimodal -1.00 angleScale'
+[Bi-0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0015.png
+    'Bimodal -0.50 angleScale'
+[Bi=0.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0016.png
+    'Bimodal =0.00 angleScale'
+[Bi+0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0017.png
+    'Bimodal +0.50 angleScale'
+[Bi+1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0018.png
+    'Bimodal +1.00 angleScale'
+[Bi+1.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0019.png
+    'Bimodal +1.50 angleScale'
+[Bi+2.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0020.png
+    'Bimodal +2.00 angleScale'
 
 <!--     iesLibPreview render images -->
-[RM-1.0_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0012.png
+[RM-1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0012.png
     'RIS -1.00 angleScale'
-[RM-.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0013.png
+[RM-0.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0013.png
     'RIS -0.75 angleScale'
-[RM-.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0014.png
+[RM-0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0014.png
     'RIS -0.50 angleScale'
-[RM-.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0015.png
+[RM-0.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0015.png
     'RIS -0.25 angleScale'
-[RM=0.0_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0016.png
+[RM=0.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0016.png
     'RIS =0.00 angleScale'
-[RM+.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0017.png
+[RM+0.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0017.png
     'RIS +0.25 angleScale'
-[RM+.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0018.png
+[RM+0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0018.png
     'RIS +0.50 angleScale'
-[RM+.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0019.png
+[RM+0.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0019.png
     'RIS +0.75 angleScale'
-[RM+1.0_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0020.png
+[RM+1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0020.png
     'RIS +1.00 angleScale'
 
-[Ka-1.0_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0012.png
+[Ka-1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0012.png
     'Karma -1.00 angleScale'
-[Ka-.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0013.png
+[Ka-0.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0013.png
     'Karma -0.75 angleScale'
-[Ka-.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0014.png
+[Ka-0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0014.png
     'Karma -0.50 angleScale'
-[Ka-.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0015.png
+[Ka-0.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0015.png
     'Karma -0.25 angleScale'
-[Ka=0.0_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0016.png
+[Ka=0.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0016.png
     'Karma =0.00 angleScale'
-[Ka+.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0017.png
+[Ka+0.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0017.png
     'Karma +0.25 angleScale'
-[Ka+.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0018.png
+[Ka+0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0018.png
     'Karma +0.50 angleScale'
-[Ka+.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0019.png
+[Ka+0.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0019.png
     'Karma +0.75 angleScale'
-[Ka+1.0_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0020.png
+[Ka+1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0020.png
     'Karma +1.00 angleScale'
+
+[Bi-2.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0012.png
+    'Bimodal -2.00 angleScale'
+[Bi-1.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0013.png
+    'Bimodal -1.50 angleScale'
+[Bi-1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0014.png
+    'Bimodal -1.00 angleScale'
+[Bi-0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0015.png
+    'Bimodal -0.50 angleScale'
+[Bi=0.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0016.png
+    'Bimodal =0.00 angleScale'
+[Bi+0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0017.png
+    'Bimodal +0.50 angleScale'
+[Bi+1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0028.png
+    'Bimodal +1.00 angleScale'
+[Bi+1.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0019.png
+    'Bimodal +1.50 angleScale'
+[Bi+2.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0020.png
+    'Bimodal +2.00 angleScale'
 
 <!--     angleScale formula graph images -->
 
-[RM-1.0_gph]: ies_angleScale_Renderman_clamped_-1.00.jpg
-[RM-.75_gph]: ies_angleScale_Renderman_clamped_-0.75.jpg
-[RM-.50_gph]: ies_angleScale_Renderman_clamped_-0.50.jpg
-[RM-.25_gph]: ies_angleScale_Renderman_clamped_-0.25.jpg
-[RM=0.0_gph]: ies_angleScale_Renderman_clamped_+0.00.jpg
-[RM+.25_gph]: ies_angleScale_Renderman_clamped_+0.25.jpg
-[RM+.50_gph]: ies_angleScale_Renderman_clamped_+0.50.jpg
-[RM+.75_gph]: ies_angleScale_Renderman_clamped_+0.75.jpg
-[RM+1.0_gph]: ies_angleScale_Renderman_clamped_+1.00.jpg
+[RM-1.00_gph]: ies_angleScale_Renderman_clamped_-1.00.jpg
+[RM-0.75_gph]: ies_angleScale_Renderman_clamped_-0.75.jpg
+[RM-0.50_gph]: ies_angleScale_Renderman_clamped_-0.50.jpg
+[RM-0.25_gph]: ies_angleScale_Renderman_clamped_-0.25.jpg
+[RM=0.00_gph]: ies_angleScale_Renderman_clamped_+0.00.jpg
+[RM+0.25_gph]: ies_angleScale_Renderman_clamped_+0.25.jpg
+[RM+0.50_gph]: ies_angleScale_Renderman_clamped_+0.50.jpg
+[RM+0.75_gph]: ies_angleScale_Renderman_clamped_+0.75.jpg
+[RM+1.00_gph]: ies_angleScale_Renderman_clamped_+1.00.jpg
 
-[Ka-1.0_gph]: ies_angleScale_Karma_clamped_-1.00.jpg
-[Ka-.75_gph]: ies_angleScale_Karma_clamped_-0.75.jpg
-[Ka-.50_gph]: ies_angleScale_Karma_clamped_-0.50.jpg
-[Ka-.25_gph]: ies_angleScale_Karma_clamped_-0.25.jpg
-[Ka=0.0_gph]: ies_angleScale_Karma_clamped_+0.00.jpg
-[Ka+.25_gph]: ies_angleScale_Karma_clamped_+0.25.jpg
-[Ka+.50_gph]: ies_angleScale_Karma_clamped_+0.50.jpg
-[Ka+.75_gph]: ies_angleScale_Karma_clamped_+0.75.jpg
-[Ka+1.0_gph]: ies_angleScale_Karma_clamped_+1.00.jpg
+[Ka-1.00_gph]: ies_angleScale_Karma_clamped_-1.00.jpg
+[Ka-0.75_gph]: ies_angleScale_Karma_clamped_-0.75.jpg
+[Ka-0.50_gph]: ies_angleScale_Karma_clamped_-0.50.jpg
+[Ka-0.25_gph]: ies_angleScale_Karma_clamped_-0.25.jpg
+[Ka=0.00_gph]: ies_angleScale_Karma_clamped_+0.00.jpg
+[Ka+0.25_gph]: ies_angleScale_Karma_clamped_+0.25.jpg
+[Ka+0.50_gph]: ies_angleScale_Karma_clamped_+0.50.jpg
+[Ka+0.75_gph]: ies_angleScale_Karma_clamped_+0.75.jpg
+[Ka+1.00_gph]: ies_angleScale_Karma_clamped_+1.00.jpg
+
+[Bi-2.00_gph]: ies_angleScale_Bimodal_clamped_-2.00.jpg
+[Bi-1.50_gph]: ies_angleScale_Bimodal_clamped_-1.50.jpg
+[Bi-1.00_gph]: ies_angleScale_Bimodal_clamped_-1.00.jpg
+[Bi-0.50_gph]: ies_angleScale_Bimodal_clamped_-0.50.jpg
+[Bi=0.00_gph]: ies_angleScale_Bimodal_clamped_+0.00.jpg
+[Bi+0.50_gph]: ies_angleScale_Bimodal_clamped_+0.50.jpg
+[Bi+1.00_gph]: ies_angleScale_Bimodal_clamped_+1.00.jpg
+[Bi+1.50_gph]: ies_angleScale_Bimodal_clamped_+1.50.jpg
+[Bi+2.00_gph]: ies_angleScale_Bimodal_clamped_+2.00.jpg
