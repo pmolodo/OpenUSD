@@ -50,12 +50,12 @@ arbitrarily from [ieslibrary.com](ieslibrary.com):
   <tr>
     <td> +90° horizontal
     <td>
-      <img src="https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0001.png"
+      <img src="iesLibPreview-karma.0001.png"
            title="Render 1 - Preview render - Example downward light" height="200"> <p>
       <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/karma/iesLibPreview-karma.0001.exr">
         [exr]
       </a>
-      <a href="https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0001.png">
+      <a href="iesLibPreview-karma.0001.png">
         [png]
       </a>
       <a href="https://ieslibrary.com/browse/download/ies/04f377f94ce81cd7b5101fffdf571454/bf62776e70fb1699c9163756404c6c7ac19a1d875f069d2e964f69722374be23?cHash=1d691542fcd0ce49d33daf0288d2092e">
@@ -107,12 +107,12 @@ arbitrarily from [ieslibrary.com](ieslibrary.com) used in the previous render:
   <tr>
     <td> +45° horizontal
     <td>
-      <img src="https://pmolodo.github.io/luxtest/img/iesTest-karma.0001.png"
+      <img src="iesTest-karma.0001.png"
            title="Render 2 - Interior of sphere - Example downward light" height="200"> <p>
       <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/karma/iesTest-karma.0001.exr">
         [exr]
       </a>
-      <a href="https://pmolodo.github.io/luxtest/img/iesTest-karma.0001.png">
+      <a href="iesTest-karma.0001.png">
         [png]
       </a>
       <a href="https://ieslibrary.com/browse/download/ies/04f377f94ce81cd7b5101fffdf571454/bf62776e70fb1699c9163756404c6c7ac19a1d875f069d2e964f69722374be23?cHash=1d691542fcd0ce49d33daf0288d2092e">
@@ -153,12 +153,12 @@ horizontal-angle differences for this discussion.)
   <tr>
     <td> +90° horizontal
     <td>
-      <img src="https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0011.png"
+      <img src="iesLibPreview-karma.0011.png"
            title="Striped IES File: Render 1 - Preview Render" height="200"> <p>
       <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/karma/iesLibPreview-karma.0011.exr">
         [exr]
       </a>
-      <a href="https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0011.png">
+      <a href="iesLibPreview-karma.0011.png">
         [png]
       </a>
       <a href="https://github.com/pmolodo/luxtest/blob/0f9955768eca64557be5150b78134b560749e392/test_vstripes_hquadrants_nonuniform.ies">
@@ -189,12 +189,12 @@ horizontal-angle differences for this discussion.)
   <tr>
     <td> +45° horizontal
     <td>
-      <img src="https://pmolodo.github.io/luxtest/img/iesTest-karma.0011.png"
+      <img src="iesTest-karma.0011.png"
            title="Striped IES File: Render 2 - Interior of sphere" height="200"> <p>
       <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/karma/iesTest-karma.0011.exr">
         [exr]
       </a>
-      <a href="https://pmolodo.github.io/luxtest/img/iesTest-karma.0011.png">
+      <a href="iesTest-karma.0011.png">
         [png]
       </a>
       <a href="https://github.com/pmolodo/luxtest/blob/0f9955768eca64557be5150b78134b560749e392/test_vstripes_hquadrants_nonuniform.ies">
@@ -349,9 +349,7 @@ angleScale formula, the exact value need to achieve this varies in each case.
         Your browser does not support displaying this video.
       </video>
       <br>
-      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/iesUp-ris.mp4">
-        [mp4]
-      </a>
+      <a href="iesUp-ris.mp4">[mp4]</a>
       <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
         [ies]
       </a>
@@ -364,7 +362,7 @@ angleScale formula, the exact value need to achieve this varies in each case.
         Your browser does not support displaying this video.
       </video>
       <br>
-      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/iesUp-karma.mp4">
+      <a href="iesUp-karma.mp4">
         [mp4]
       </a>
       <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
@@ -398,7 +396,7 @@ angleScale formula, the exact value need to achieve this varies in each case.
         Your browser does not support displaying this video.
       </video>
       <br>
-      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/iesDown-ris.mp4">
+      <a href="iesDown-ris.mp4">
         [mp4]
       </a>
       <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimDown.ies">
@@ -413,7 +411,7 @@ angleScale formula, the exact value need to achieve this varies in each case.
         Your browser does not support displaying this video.
       </video>
       <br>
-      <a href="https://github.com/pmolodo/luxtest_renders/raw/5de1733f711d9fa4dbc313e6bded4b312d321137/iesDown-karma.mp4">
+      <a href="iesDown-karma.mp4">
         [mp4]
       </a>
       <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimDown.ies">
@@ -523,6 +521,64 @@ $$
 | ![Bi-2.00_gph] | ![Bi-1.50_gph] | ![Bi-1.00_gph] | ![Bi-0.50_gph] | ![Bi=0.00_gph] | ![Bi+0.50_gph] | ![Bi+1.00_gph] | ![Bi+1.50_gph] | ![Bi+2.00_gph] |
 
 
+<table>
+  <tr>
+    <td>Light Direction</td>
+    <td>Bimodal</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Up</td>
+    <td style="vertical-align:top">
+      <video controls loop src="https://github.com/user-attachments/assets/to-upload" type="video/mp4" height="200">
+        Your browser does not support displaying this video.
+      </video>
+      <br>
+      <a href="iesUp-embree.mp4">
+        [mp4]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimUp.ies">
+        [ies]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesUp.usda">
+        [usda]
+      </a> (frames 1-49)
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align:top">
+      <ul>
+        <li> "Good" scaling - seems to grow + shrink
+        <li> angleScale: .5 scale = -.5; 1.5 scale = -1.5
+      </ul>
+    </td>
+  <tr>
+    <td rowspan="2">Down</td>
+    <td style="vertical-align:top">
+      <video controls loop src="https://github.com/user-attachments/assets/to-upload" type="video/mp4" height="200">
+        Your browser does not support displaying this video.
+      </video>
+      <br>
+      <a href="iesDown-embree.mp4">
+        [mp4]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/test_vstripes_hquadrants_nonuniform_aimDown.ies">
+        [ies]
+      </a>
+      <a href="https://raw.githubusercontent.com/pmolodo/luxtest/9d555a66d0a699855342df5491a93851b3e011c2/usd/iesDown.usda">
+        [usda]
+      </a> (frames 1-49)
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align:top">
+      <ul>
+        <li> "Good" scaling - seems to grow + shrink
+        <li> angleScale: .5 scale = .5; 1.5 scale = 1.5
+      </ul>
+    </td>
+  </tr>
+</table>
+
 
 Pros:
 - Can give "good" scaling with lights aimed either up OR down
@@ -616,120 +672,120 @@ there may not be much demand for this level of control.
 [up_light]: https://ieslibrary.com/ies/BEGA/0184e55f1f5ef8ee9e8b006d6a7bf558.jpg
 
 <!--     iesTest render images -->
-[RM-1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0012.png
-    'RIS -1.00 angleScale'
-[RM-0.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0013.png
-    'RIS -0.75 angleScale'
-[RM-0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0014.png
-    'RIS -0.50 angleScale'
-[RM-0.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0015.png
-    'RIS -0.25 angleScale'
-[RM=0.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0016.png
-    'RIS =0.00 angleScale'
-[RM+0.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0017.png
-    'RIS +0.25 angleScale'
-[RM+0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0018.png
-    'RIS +0.50 angleScale'
-[RM+0.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0019.png
-    'RIS +0.75 angleScale'
-[RM+1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-ris.0020.png
-    'RIS +1.00 angleScale'
+[RM-1.00_tst]: iesTest-ris.0012.png
+    'RIS Sphere Interior -1.00 angleScale'
+[RM-0.75_tst]: iesTest-ris.0013.png
+    'RIS Sphere Interior -0.75 angleScale'
+[RM-0.50_tst]: iesTest-ris.0014.png
+    'RIS Sphere Interior -0.50 angleScale'
+[RM-0.25_tst]: iesTest-ris.0015.png
+    'RIS Sphere Interior -0.25 angleScale'
+[RM=0.00_tst]: iesTest-ris.0016.png
+    'RIS Sphere Interior =0.00 angleScale'
+[RM+0.25_tst]: iesTest-ris.0017.png
+    'RIS Sphere Interior +0.25 angleScale'
+[RM+0.50_tst]: iesTest-ris.0018.png
+    'RIS Sphere Interior +0.50 angleScale'
+[RM+0.75_tst]: iesTest-ris.0019.png
+    'RIS Sphere Interior +0.75 angleScale'
+[RM+1.00_tst]: iesTest-ris.0020.png
+    'RIS Sphere Interior +1.00 angleScale'
 
-[Ka-1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0012.png
-    'Karma -1.00 angleScale'
-[Ka-0.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0013.png
-    'Karma -0.75 angleScale'
-[Ka-0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0014.png
-    'Karma -0.50 angleScale'
-[Ka-0.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0015.png
-    'Karma -0.25 angleScale'
-[Ka=0.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0016.png
-    'Karma =0.00 angleScale'
-[Ka+0.25_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0017.png
-    'Karma +0.25 angleScale'
-[Ka+0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0018.png
-    'Karma +0.50 angleScale'
-[Ka+0.75_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0019.png
-    'Karma +0.75 angleScale'
-[Ka+1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-karma.0020.png
-    'Karma +1.00 angleScale'
+[Ka-1.00_tst]: iesTest-karma.0012.png
+    'Karma Sphere Interior -1.00 angleScale'
+[Ka-0.75_tst]: iesTest-karma.0013.png
+    'Karma Sphere Interior -0.75 angleScale'
+[Ka-0.50_tst]: iesTest-karma.0014.png
+    'Karma Sphere Interior -0.50 angleScale'
+[Ka-0.25_tst]: iesTest-karma.0015.png
+    'Karma Sphere Interior -0.25 angleScale'
+[Ka=0.00_tst]: iesTest-karma.0016.png
+    'Karma Sphere Interior =0.00 angleScale'
+[Ka+0.25_tst]: iesTest-karma.0017.png
+    'Karma Sphere Interior +0.25 angleScale'
+[Ka+0.50_tst]: iesTest-karma.0018.png
+    'Karma Sphere Interior +0.50 angleScale'
+[Ka+0.75_tst]: iesTest-karma.0019.png
+    'Karma Sphere Interior +0.75 angleScale'
+[Ka+1.00_tst]: iesTest-karma.0020.png
+    'Karma Sphere Interior +1.00 angleScale'
 
-[Bi-2.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0012.png
-    'Bimodal -2.00 angleScale'
-[Bi-1.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0013.png
-    'Bimodal -1.50 angleScale'
-[Bi-1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0014.png
-    'Bimodal -1.00 angleScale'
-[Bi-0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0015.png
-    'Bimodal -0.50 angleScale'
-[Bi=0.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0016.png
-    'Bimodal =0.00 angleScale'
-[Bi+0.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0017.png
-    'Bimodal +0.50 angleScale'
-[Bi+1.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0018.png
-    'Bimodal +1.00 angleScale'
-[Bi+1.50_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0019.png
-    'Bimodal +1.50 angleScale'
-[Bi+2.00_tst]: https://pmolodo.github.io/luxtest/img/iesTest-bimodal.0020.png
-    'Bimodal +2.00 angleScale'
+[Bi-2.00_tst]: iesTest-embree.0012.png
+    'Bimodal Sphere Interior -2.00 angleScale'
+[Bi-1.50_tst]: iesTest-embree.0013.png
+    'Bimodal Sphere Interior -1.50 angleScale'
+[Bi-1.00_tst]: iesTest-embree.0014.png
+    'Bimodal Sphere Interior -1.00 angleScale'
+[Bi-0.50_tst]: iesTest-embree.0015.png
+    'Bimodal Sphere Interior -0.50 angleScale'
+[Bi=0.00_tst]: iesTest-embree.0016.png
+    'Bimodal Sphere Interior =0.00 angleScale'
+[Bi+0.50_tst]: iesTest-embree.0017.png
+    'Bimodal Sphere Interior +0.50 angleScale'
+[Bi+1.00_tst]: iesTest-embree.0018.png
+    'Bimodal Sphere Interior +1.00 angleScale'
+[Bi+1.50_tst]: iesTest-embree.0019.png
+    'Bimodal Sphere Interior +1.50 angleScale'
+[Bi+2.00_tst]: iesTest-embree.0020.png
+    'Bimodal Sphere Interior +2.00 angleScale'
 
 <!--     iesLibPreview render images -->
-[RM-1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0012.png
-    'RIS -1.00 angleScale'
-[RM-0.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0013.png
-    'RIS -0.75 angleScale'
-[RM-0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0014.png
-    'RIS -0.50 angleScale'
-[RM-0.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0015.png
-    'RIS -0.25 angleScale'
-[RM=0.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0016.png
-    'RIS =0.00 angleScale'
-[RM+0.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0017.png
-    'RIS +0.25 angleScale'
-[RM+0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0018.png
-    'RIS +0.50 angleScale'
-[RM+0.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0019.png
-    'RIS +0.75 angleScale'
-[RM+1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-ris.0020.png
-    'RIS +1.00 angleScale'
+[RM-1.00_pre]: iesLibPreview-ris.0012.png
+    'RIS Preview-1.00 angleScale'
+[RM-0.75_pre]: iesLibPreview-ris.0013.png
+    'RIS Preview-0.75 angleScale'
+[RM-0.50_pre]: iesLibPreview-ris.0014.png
+    'RIS Preview-0.50 angleScale'
+[RM-0.25_pre]: iesLibPreview-ris.0015.png
+    'RIS Preview-0.25 angleScale'
+[RM=0.00_pre]: iesLibPreview-ris.0016.png
+    'RIS Preview=0.00 angleScale'
+[RM+0.25_pre]: iesLibPreview-ris.0017.png
+    'RIS Preview+0.25 angleScale'
+[RM+0.50_pre]: iesLibPreview-ris.0018.png
+    'RIS Preview+0.50 angleScale'
+[RM+0.75_pre]: iesLibPreview-ris.0019.png
+    'RIS Preview+0.75 angleScale'
+[RM+1.00_pre]: iesLibPreview-ris.0020.png
+    'RIS Preview+1.00 angleScale'
 
-[Ka-1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0012.png
-    'Karma -1.00 angleScale'
-[Ka-0.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0013.png
-    'Karma -0.75 angleScale'
-[Ka-0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0014.png
-    'Karma -0.50 angleScale'
-[Ka-0.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0015.png
-    'Karma -0.25 angleScale'
-[Ka=0.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0016.png
-    'Karma =0.00 angleScale'
-[Ka+0.25_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0017.png
-    'Karma +0.25 angleScale'
-[Ka+0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0018.png
-    'Karma +0.50 angleScale'
-[Ka+0.75_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0019.png
-    'Karma +0.75 angleScale'
-[Ka+1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-karma.0020.png
-    'Karma +1.00 angleScale'
+[Ka-1.00_pre]: iesLibPreview-karma.0012.png
+    'Karma Preview-1.00 angleScale'
+[Ka-0.75_pre]: iesLibPreview-karma.0013.png
+    'Karma Preview-0.75 angleScale'
+[Ka-0.50_pre]: iesLibPreview-karma.0014.png
+    'Karma Preview-0.50 angleScale'
+[Ka-0.25_pre]: iesLibPreview-karma.0015.png
+    'Karma Preview-0.25 angleScale'
+[Ka=0.00_pre]: iesLibPreview-karma.0016.png
+    'Karma Preview=0.00 angleScale'
+[Ka+0.25_pre]: iesLibPreview-karma.0017.png
+    'Karma Preview+0.25 angleScale'
+[Ka+0.50_pre]: iesLibPreview-karma.0018.png
+    'Karma Preview+0.50 angleScale'
+[Ka+0.75_pre]: iesLibPreview-karma.0019.png
+    'Karma Preview+0.75 angleScale'
+[Ka+1.00_pre]: iesLibPreview-karma.0020.png
+    'Karma Preview+1.00 angleScale'
 
-[Bi-2.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0012.png
-    'Bimodal -2.00 angleScale'
-[Bi-1.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0013.png
-    'Bimodal -1.50 angleScale'
-[Bi-1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0014.png
-    'Bimodal -1.00 angleScale'
-[Bi-0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0015.png
-    'Bimodal -0.50 angleScale'
-[Bi=0.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0016.png
-    'Bimodal =0.00 angleScale'
-[Bi+0.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0017.png
-    'Bimodal +0.50 angleScale'
-[Bi+1.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0028.png
-    'Bimodal +1.00 angleScale'
-[Bi+1.50_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0019.png
-    'Bimodal +1.50 angleScale'
-[Bi+2.00_pre]: https://pmolodo.github.io/luxtest/img/iesLibPreview-bimodal.0020.png
-    'Bimodal +2.00 angleScale'
+[Bi-2.00_pre]: iesLibPreview-embree.0012.png
+    'Bimodal Preview-2.00 angleScale'
+[Bi-1.50_pre]: iesLibPreview-embree.0013.png
+    'Bimodal Preview-1.50 angleScale'
+[Bi-1.00_pre]: iesLibPreview-embree.0014.png
+    'Bimodal Preview-1.00 angleScale'
+[Bi-0.50_pre]: iesLibPreview-embree.0015.png
+    'Bimodal Preview-0.50 angleScale'
+[Bi=0.00_pre]: iesLibPreview-embree.0016.png
+    'Bimodal Preview=0.00 angleScale'
+[Bi+0.50_pre]: iesLibPreview-embree.0017.png
+    'Bimodal Preview+0.50 angleScale'
+[Bi+1.00_pre]: iesLibPreview-embree.0018.png
+    'Bimodal Preview+1.00 angleScale'
+[Bi+1.50_pre]: iesLibPreview-embree.0019.png
+    'Bimodal Preview+1.50 angleScale'
+[Bi+2.00_pre]: iesLibPreview-embree.0020.png
+    'Bimodal Preview+2.00 angleScale'
 
 <!--     angleScale formula graph images -->
 
