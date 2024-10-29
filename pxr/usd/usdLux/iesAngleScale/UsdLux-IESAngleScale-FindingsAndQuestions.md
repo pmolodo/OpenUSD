@@ -345,7 +345,7 @@ angleScale formula, the exact value need to achieve this varies in each case.
   <tr>
     <td rowspan="2">Up</td>
     <td style="vertical-align:top">
-      <video controls loop src="https://github.com/user-attachments/assets/f79c0502-d602-48e3-94d1-a88f1e084822" type="video/mp4" height="200">
+      <video controls loop src="https://github.com/user-attachments/assets/d03daed7-1c16-4df3-8d2b-070e7b9d22eb" type="video/mp4" height="200">
         Your browser does not support displaying this video.
       </video>
       <br>
@@ -529,7 +529,7 @@ $$
   <tr>
     <td rowspan="2">Up</td>
     <td style="vertical-align:top">
-      <video controls loop src="https://github.com/user-attachments/assets/to-upload" type="video/mp4" height="200">
+      <video controls loop src="https://github.com/user-attachments/assets/a29ef940-9c89-4186-8ffe-37ec93e39148" type="video/mp4" height="200">
         Your browser does not support displaying this video.
       </video>
       <br>
