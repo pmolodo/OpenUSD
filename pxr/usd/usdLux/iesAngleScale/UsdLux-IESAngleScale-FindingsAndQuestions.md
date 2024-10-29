@@ -509,7 +509,7 @@ $$
 \end{dcases}
 $$
 
-![ies_angleScale_bimodal_Clamped.jpg](ies_angleScale_bimodal_Clamped.jpg)
+![ies_angleScale_Bimodal_clamped.jpg](ies_angleScale_Bimodal_clamped.jpg)
 
 #### Bimodal: ies:angleScale from -2 to -2
 
