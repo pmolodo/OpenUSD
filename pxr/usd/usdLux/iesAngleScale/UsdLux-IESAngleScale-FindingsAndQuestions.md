@@ -529,7 +529,7 @@ $$
   <tr>
     <td rowspan="2">Up</td>
     <td style="vertical-align:top">
-      <video controls loop src="https://github.com/user-attachments/assets/a29ef940-9c89-4186-8ffe-37ec93e39148" type="video/mp4" height="200">
+      <video controls loop src="https://github.com/user-attachments/assets/b3b99cdf-a981-4a5b-a40b-3e5cb5917c1a" type="video/mp4" height="200">
         Your browser does not support displaying this video.
       </video>
       <br>
@@ -554,7 +554,7 @@ $$
   <tr>
     <td rowspan="2">Down</td>
     <td style="vertical-align:top">
-      <video controls loop src="https://github.com/user-attachments/assets/to-upload" type="video/mp4" height="200">
+      <video controls loop src="https://github.com/user-attachments/assets/a29ef940-9c89-4186-8ffe-37ec93e39148" type="video/mp4" height="200">
         Your browser does not support displaying this video.
       </video>
       <br>
