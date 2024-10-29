@@ -580,29 +580,31 @@ $$
 </table>
 
 
-Pros:
+**Pros:**
 - Can give "good" scaling with lights aimed either up OR down
   - Use positive values for lights aimed down (most common)
   - Use negative values for lights aimed up
 - Requires no additional attributes
-- Provides a backwards-compatible mapping for either RenderMan or Karma
-  - Renderman:
+- Provides a backwards-compatible mapping for either RenderMan or Karma:
 
-    $$
+
+$\quad\quad$ RenderMan:
+
+$$
         angleScale_{new} = - (1 + angleScale_{old_R})
-    $$
+$$
 
-  - Karma:
+$\quad\quad$ Karma:
 
-    $$
+$$
         angleScale_{new} = \begin{dcases}
             1 -  angleScale_{old_K} & \text{if} \quad 0 < angleScale_{old_K} < 1 \\
             \frac{1}{1 + angleScale_{old_K}} & \text{if} \quad -1 < angleScale_{old_K} < 0   \\
         \end{dcases}
-    $$
+$$
 
 
-Cons:
+**Cons:**
 - Doesn't give "good" scaling with ALL lights (ie, lights aimed to the side)
 - ...nor does it provide a clear path to supporting any aim direction in the
   future
