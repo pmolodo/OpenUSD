@@ -82,7 +82,7 @@ TODO
 
 ## Stage 2: Reference Implementation
 
-Once we have provided clear guidance on expected behavior for UsdLux lights, we will update the included Embree render delegate to include support for UsdLux lights.  This will give a reference implementation to aid those wishing to provide UsdLux support in their renderers.
+Once we have provided clear guidance on expected behavior for UsdLux lights, we will update the included HdEmbree render delegate to include support for UsdLux lights.  This will give a reference implementation to aid those wishing to provide UsdLux support in their renderers.
 
 ### Performance vs Clarity
 
