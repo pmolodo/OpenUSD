@@ -44,7 +44,7 @@ However, we felt that it would be better to simply update the existing schema, f
 
   The ambiguities in the current specification make UsdLux a poor fit for external interchange of lights, as there is no assurance that they will be interpreted in the same manner as originally intended.
 
-  Thus we expect most existing usage of UsdLux assets to be "site internal" - ie, for private assets used within a company in it's own rendering pipeline.  While it's hard to know the extent of such usage, it's worth noting that such entities can employ tactics to ease compatibility issues that aren't applicable in the "general" case - see below for more details.
+  Thus we expect most existing usage of UsdLux assets to be "site internal" - ie, for private assets used within a company in it's own rendering pipeline.  While it's hard to know the extent of such usage, such entities can employ tactics to ease transition that aren't applicable in the "general" case - see below for more details.
 
 ### Backward Compatibility Notes
 
