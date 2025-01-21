@@ -24,7 +24,27 @@ We propose that the documentation for the UsdLux schema should be updated, such 
 
 #### New Schemas (or new schema versions)
 
-TODO
+Instead of updating the documentation for the existing UsdLux schema, we could have opted to create of an entirely new schema, possibly making use of USD's [schema versioning].  The advantage of this would be backward compatibility for existing UsdLux assets - any renderers which previously implemented any UsdLux behavior in a different way could retain their existing implementation for the "old" schema, and only provide new / unified behavior for a new schema.
+
+However, we felt that it would be better to simply update the existing schema, for the following reasons:
+
+- Not Keeping Undefined Behavior
+
+  In most cases, we are not changing defined behavior, but clarifying undefined or ambiguously defined behavior.  If we leave the current schema "as is", then we are essentially committing to forever keeping the current schema's behavior undefined or poorly defined.
+
+- C++ Complexity of Supporting Multiple Schemas
+
+  If we introduce a completely new schema, it makes interacting with "generic" UsdLux objects difficult at a C++ level.  For instance, if we add a new `UsdLuxDomeLight_1`, all C++ methods that currently work with `UsdLuxDomeLight` will have to be modified to work with `std::variant<UsdLuxDomeLight, UsdLuxDomeLight_1>`, or else they are both made to inherit from a `UsdLuxDomeLightBase`, etc.  In either case, it's a fairly large change to the existing APIs, both inside of the OpenUSD codebase, and for any 3rd-party render delegate implementations.
+
+  Unfortunately, USD [schema versioning] as currently implemented doesn't do much to help with this - it only provides utilities for identifying if two schemas share the same "family", but no means for treating members of a family in a unified manner.
+
+- Relatively Low Current Adoption of UsdLux
+
+  Without having done any formal polling, our general sense is that adoption of UsdLux is still fairly low.
+
+  The ambiguities in the current specification make UsdLux a poor fit for external interchange of lights, as there is no assurance that they will be interpreted in the same manner as originally intended.
+
+  Thus we expect most existing usage of UsdLux assets to be "site internal" - ie, for private assets used within a company in it's own rendering pipeline.  While it's hard to know the extent of such usage, it's worth noting that such entities can employ tactics to ease compatibility issues that aren't applicable in the "general" case - see below for more details.
 
 ### Backward Compatibility Notes
 
@@ -120,3 +140,5 @@ render delegate was broken into a chain of smaller PRs:
 [moore-karma]: https://github.com/anderslanglands/light_comparison/blob/main/renders/moore-lane/moore-lane_karma.jpg?raw=true "Karma"
 [moore-arnold]: https://github.com/anderslanglands/light_comparison/blob/main/renders/moore-lane/moore-lane_arnold.jpg?raw=true "Arnold"
 [moore-rtx]: https://github.com/anderslanglands/light_comparison/blob/main/renders/moore-lane/moore-lane_rtx.jpg?raw=true "Omniverse RTX"
+
+[schema versioning]: https://openusd.org/dev/wp_schema_versioning.html
