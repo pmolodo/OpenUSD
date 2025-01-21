@@ -28,17 +28,17 @@ Instead of updating the documentation for the existing UsdLux schema, we could h
 
 However, we felt that it would be better to simply update the existing schema, for the following reasons:
 
-- Not Keeping Undefined Behavior
+- **Not Keeping Undefined Behavior**
 
   In most cases, we are not changing defined behavior, but clarifying undefined or ambiguously defined behavior.  If we leave the current schema "as is", then we are essentially committing to forever keeping the current schema's behavior undefined or poorly defined.
 
-- C++ Complexity of Supporting Multiple Schemas
+- **C++ Complexity of Supporting Multiple Schemas**
 
   If we introduce a completely new schema, it makes interacting with "generic" UsdLux objects difficult at a C++ level.  For instance, if we add a new `UsdLuxDomeLight_1`, all C++ methods that currently work with `UsdLuxDomeLight` will have to be modified to work with `std::variant<UsdLuxDomeLight, UsdLuxDomeLight_1>`, or else they are both made to inherit from a `UsdLuxDomeLightBase`, etc.  In either case, it's a fairly large change to the existing APIs, both inside of the OpenUSD codebase, and for any 3rd-party render delegate implementations.
 
   Unfortunately, current USD [schema versioning] doesn't help with this - it only provides utilities for identifying if two schemas share the same "family", but no means for treating members of a family in a unified manner.
 
-- Relatively Low Current Adoption of UsdLux
+- **Relatively Low Current Adoption of UsdLux**
 
   Without having done any formal polling, our general sense is that adoption of UsdLux is still fairly low.
 
