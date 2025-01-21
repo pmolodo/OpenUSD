@@ -24,7 +24,7 @@ We propose that the documentation for the UsdLux schema should be updated, such 
 
 #### New Schemas (or new schema versions)
 
-We could have instead opted to create an entirely new schema, possibly making use of USD's [schema versioning].  The advantage of this would be backward compatibility for existing UsdLux assets - any renderers which previously implemented any UsdLux behavior in a different way could retain their existing implementation for the "old" schema, and only provide new / unified behavior for a new schema.
+We could have opted to create an entirely new schema, possibly making use of USD's [schema versioning].  The advantage of this would be backward compatibility for existing UsdLux assets - any renderers which previously implemented any UsdLux behavior in a different way could retain their existing implementation for the "old" schema, and only provide new / unified behavior for a new schema.
 
 However, we felt that it would be better to simply update the existing schema, for the following reasons:
 
