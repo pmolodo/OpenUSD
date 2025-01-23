@@ -66,10 +66,33 @@ As mentioned above, we expect most existing usage of UsdLux assets to be "site i
 - They could specify "old" behavior by default in a site-wide renderer configuration file.  Going forward, all new UsdLux assets could be explicitly authored as using the "new behavior".  At some point in the future when no "old" assets are in use, they could switch the site-wide default to "new", and stop explicitly authoring compatibilty information on new assets.
 
 
-### Affected Schema Classes and Attributes
+### Updated Schema Classes and Attributes
 
-TODO
-(if including exact formulas, would go here)
+TODO: fill out details of what changed
+
+#### LightAPI
+
+- ##### Non-Attribute Specific: Units
+- ##### Attribute: `inputs:intensity`
+- ##### Attribute: `inputs:exposure`
+- ##### Attribute: `inputs:normalize`
+- ##### Attribute: `inputs:color`
+- ##### Attribute: `inputs:colorTemperature`
+
+#### ShapingAPI
+
+- ##### Attribute: `inputs:shaping:focus`
+- ##### Attribute: `inputs:shaping:focusTint`
+- ##### Attribute: `inputs:shaping:cone:angle`
+- ##### Attribute: `inputs:shaping:cone:softness`
+- ##### Attribute: `inputs:shaping:ies:file`
+- ##### Attribute: `inputs:shaping:ies:angleScale`
+- ##### Attribute: `inputs:shaping:ies:angleScale`
+- ##### Attribute: `inputs:shaping:ies:normalize`
+
+#### DistantLight
+
+- ##### Attribute: `inputs:angle`
 
 ### Reference Pull Request
 
