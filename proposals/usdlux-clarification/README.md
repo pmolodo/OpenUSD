@@ -382,7 +382,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > </div>
   >
   > For angles < coneAngle, behavior is determined by shaping:cone:softness
-  > - see below.  But at the default of coneSoftness = 0, the luminance is
+  > (see below).  But at the default of coneSoftness = 0, the luminance is
   > unaltered if the emissionOffAxisAngle <= coneAngle, so the coneAngle
   > functions as a hard binary "off" toggle for all angles > coneAngle.
 
