@@ -506,15 +506,25 @@ Once we have provided clear guidance on expected behavior for UsdLux lights, we 
 
 ### Performance vs Clarity
 
-TODO
+The goal of the UsdLux support in HdEmbree will be as a reference, not for it to be used as a production renderer;
+therefore, it will not be performance optimized, and in fact will prefer clarity and simplicity in it's code over
+performance.
 
 ### Supported Light Types
 
-TODO
+- DistantLight
+- DiskLight
+- RectLight
+- SphereLight
+- CylinderLight
+- DomeLight
 
 ### Unsupported Lights and Features
 
-TODO
+- MeshLightAPI
+- GeometryLight
+- PortalLight
+- PluginLight
 
 ### Reference Pull Requests
 
