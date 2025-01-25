@@ -323,7 +323,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > 
   > <center><b>
   >     focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup>
-  > 
+  > <p>
   >             L<sub>Color</sub> = focusFactor ⋅ L<sub>Color</sub>
   > </b></center>
   > 
@@ -339,15 +339,34 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > 
   > <center><b>
   >     focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup>
-  > 
+  > <p>
   >         focusColor = lerp(focusFactor, focusTint, [1, 1, 1])
-  > 
+  > <p>
   >         L<sub>Color</sub> =
   >             componentwiseMultiply(focusColor, L<sub>Color</sub>)
   > </b></center>
   > 
   > Note that this implies that a focusTint of pure white will disable
   > focus.
+
+  > Off-axis color tint.  This tints the emission in the
+  > falloff region.  The default tint is black.
+  > 
+  > This is implemented as a linear interpolation between `focusTint` and
+  > white, by the factor computed from the focus attribute, in other words:
+  > 
+  > <center><b>
+  >     focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup>
+  > <p>
+  >         focusColor = lerp(focusFactor, focusTint, [1, 1, 1])
+  > <p>
+  >         L<sub>Color</sub> =
+  >             componentwiseMultiply(focusColor, L<sub>Color</sub>)
+  > </b></center>
+  > 
+  > Note that this implies that a focusTint of pure white will disable
+  > focus.
+
 
 - ##### Attribute: `inputs:shaping:cone:angle`
 
@@ -360,13 +379,12 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > 
   > <center><b>
   >             𝛳<sub>offAxis</sub> = acos(lightAxis • emissionDir)
-  > 
+  > <p>
   >             𝛳<sub>cutoff</sub> = toRadians(coneAngle)
-  > 
-  > 
+  > <p>
   >             𝛳<sub>offAxis</sub> > 𝛳<sub>cutoff</sub>
   >                     ⟹ L<sub>Scalar</sub> = 0
-  > 
+  > <p>
   > </b></center>
   > 
   > For angles < coneAngle, behavior is determined by shaping:cone:softness
@@ -389,11 +407,11 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > 
   > <center><b>
   >         𝛳<sub>offAxis</sub> = acos(lightAxis • emissionDir)
-  > 
+  > <p>
   >             𝛳<sub>cutoff</sub> = toRadians(coneAngle)
-  > 
+  > <p>
   >     𝛳<sub>smoothStart</sub> = lerp(coneSoftness, 𝛳<sub>cutoff</sub>, 0)
-  > 
+  > <p>
   >     L<sub>Scalar</sub> = L<sub>Scalar</sub> ⋅
   >             (1 - smoothStep(𝛳<sub>offAxis</sub>,
   >                             𝛳<sub>smoothStart</sub>,
@@ -423,13 +441,13 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > <center><b>
   >         𝛳<sub>light</sub>, 𝜙 =
   >             toPolarCoordinates(emissionDirectionInLightSpace)
-  > 
+  > <p>
   >     𝛳<sub>ies</sub> = applyAngleScale(𝛳<sub>light</sub>, angleScale)
-  > 
+  > <p>
   >             iesSample = sampleIES(iesFile, 𝛳<sub>ies</sub>, 𝜙)
-  > 
+  > <p>
   >         iesNormalize ⟹ iesSample = iesSample ⋅ iesProfilePower(iesFile)
-  > 
+  > <p>
   >             L<sub>Color</sub> = iesSample ⋅ L<sub>Color</sub>
   > </b></center>
   > 
@@ -454,9 +472,9 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > 
   > <center><b>
   >             profileScale = 1 + angleScale
-  > 
+  > <p>
   > 𝛳<sub>ies</sub> = (𝛳<sub>light</sub> - 𝜋) / profileScale + 𝜋
-  > 
+  > <p>
   >             𝛳<sub>ies</sub> = clamp(𝛳<sub>ies</sub>, 0, 𝜋)
   > </b></center>
   > 
