@@ -125,12 +125,13 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
 - ##### Attribute: `inputs:intensity`
   
   > Scales the brightness of the light linearly.
-  > 
+  >
   > Expresses the "base", unmultiplied luminance emitted (L) of the light,
   > in nits (cd∕m²):
   >
   > <center><b>
   >                 L<sub>Scalar</sub> = intensity
+  > <p>
   > </b></center>
   >
   > Normatively, the lights' emission is in units of spectral radiance
@@ -145,11 +146,12 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > Scales the brightness of the light exponentially as a power
   > of 2 (similar to an F-stop control over exposure).  The result
   > is multiplied against the intensity:
-  > 
+  >
   > <center><b>
   >         L<sub>Scalar</sub> = L<sub>Scalar</sub> ⋅ 2<sup>exposure</sup>
+  > <p>
   > </b></center>
-  > 
+  >
   > Normatively, the lights' emission is in units of spectral radiance
   > normalized such that a directly visible light with `intensity` 1 and
   > `exposure` 0 normally incident upon the sensor plane will generate a
@@ -162,99 +164,106 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > Normalizes the emission such that the power of the light
   > remains constant while altering the size of the light, by dividing the
   > luminance by the world-space surface area of the light.
-  > 
+  >
   > This makes it easier to independently adjust the brightness and size
   > of the light, by causing the total illumination provided by a light to
   > not vary with the area or angular size of the light.
-  > 
+  >
   > Mathematically, this means that the luminance of the light will be
   > divided by a factor representing the "size" of the light:
-  > 
+  >
   > <center><b>
   >                 L<sub>Scalar</sub> = L<sub>Scalar</sub> / sizeFactor
+  > <p>
   > </b></center>
-  > 
+  >
   > ...where `sizeFactor` = 1 if `normalize` is off, and is calculated
   > depending on the family of the light as described below if `normalize`
   > is on.
-  > 
+  >
   > ### DomeLight / PortalLight:
-  > 
+  >
   > For a dome light (and its henchman, the PortalLight), this attribute is
   > ignored:
-  > 
+  >
   > <center><b>
   >                 sizeFactor<sub>dome</sub> = 1
+  > <p>
   > </b></center>
-  > 
+  >
   > ### Area Lights:
-  > 
+  >
   > For an area light, the `sizeFactor` is the surface area (in world
   > space) of the shape of the light, including any scaling applied to the
   > light by its transform stack. This includes the boundable light types
   > which have a calculable surface area:
-  > 
+  >
   > - MeshLightAPI
   > - DiskLight
   > - RectLight
   > - SphereLight
   > - CylinderLight
   > - (deprecated) GeometryLight
-  > 
+  >
   > <center><b>
   >                 sizeFactor<sub>area</sub> = worldSpaceSurfaceArea(light)
+  > <p>
   > </b></center>
-  > 
+  >
   > ### DistantLight:
-  > 
+  >
   > For distant lights, we first define 𝛳<sub>max</sub> as:
-  > 
+  >
   > <center><b>
   >         𝛳<sub>max</sub> = clamp(toRadians(distantLightAngle) / 2, 0, 𝜋)
+  > <p>
   > </b></center>
-  > 
+  >
   > Then we use the following formula:
-  > 
+  >
   > * <i>if 𝛳<sub>max</sub> = 0:</i>
   > <center><b>
   >         sizeFactor<sub>distant</sub> = 1
+  > <p>
   > </b></center>
-  > 
+  >
   > * <i>if 0 < 𝛳<sub>max</sub> ≤ 𝜋 / 2:</i>
   > <center><b>
   >     sizeFactor<sub>distant</sub> = sin²𝛳<sub>max</sub> ⋅ 𝜋
+  > <p>
   > </b></center>
-  > 
+  >
   > * <i>if 𝜋 / 2 < 𝛳<sub>max</sub> ≤ 𝜋:</i>
   > <center><b>
   >             sizeFactor<sub>distant</sub> =
   >                 (2 - sin²𝛳<sub>max</sub>) ⋅ 𝜋
+  > <p>
   > </b></center>
-  > 
+  >
   > This formula is used because it satisfies the following two properties:
-  > 
+  >
   > 1. When normalize is enabled, the received illuminance from this light
   >     on a surface normal to the light's primary direction is held constant
   >     when angle changes, and the "intensity" property becomes a measure of
   >     the illuminance, expressed in lux, for a light with 0 exposure.
-  > 
+  >
   > 2. If we assume that our distant light is an approximation for a "very
   >     far" sphere light (like the sun), then (for
   >     *0 < 𝛳<sub>max</sub> ≤ 𝜋/2*) this definition agrees with the
   >     definition used for area lights - ie, the total power of this distant
   >     sphere light is constant when the "size" (ie, angle) changes, and our
   >     sizeFactor is proportional to the total surface area of this sphere.
-  > 
+  >
   > ### Other Lights
-  > 
+  >
   > The above taxonomy describes behavior for all built-in light types.
   > (Note that the above is based on schema *family* - ie, `DomeLight_1`
   > follows the rules for a `DomeLight`, and ignores `normalize`.)
-  > 
+  >
   > Lights from other third-party plugins / schemas must document their
   > expected behavior with regards to normalize.  However, some general
   > guidelines are:
-  > 
+  >
   > - Lights that either inherit from or are strongly associated with one of
   >     the built-in types should follow the behavior of the built-in type
   >     they inherit/resemble; ie, a renderer-specific "MyRendererRectLight"
@@ -265,7 +274,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > - Lights that are non-boundable and/or have no way to concretely or even
   >     "intuitively" associate them with a "size" will ignore this attribe
   >     (and always set sizeFactor = 1)
-  > 
+  >
   > Lights that don't clearly meet any of the above criteria may either
   > ignore the normalize attribute or try to implement support using
   > whatever hueristic seems to make sense - for instance,
@@ -275,13 +284,14 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
 - ##### Attribute: `inputs:color`
 
   > The color of emitted light, in the rendering color space.
-  > 
+  >
   > This color is just multiplied with the emission:
-  > 
+  >
   > <center><b>
   >                 L<sub>Color</sub> = L<sub>Scalar</sub> ⋅ color
+  > <p>
   > </b></center>
-  > 
+  >
   > In the case of a spectral renderer, this color should be uplifted such
   > that it round-trips to within the limit of numerical accuracy under the
   > rendering illuminant.  We recommend the use of a rendering color space
@@ -297,12 +307,12 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > enableColorTemperature is set to true.  When active, the
   > computed result multiplies against the color attribute.
   > See UsdLuxBlackbodyTemperatureAsRgb().
-  > 
+  >
   > This is always calculated as an RGB color using a D65 white point,
   > regardless of the rendering color space, normalized such that the
   > default value of 6500 will always result in white, and then should be
   > transformed to the rendering color space.
-  > 
+  >
   > Spectral renderers should do the same and then uplift the resulting
   > color after multiplying with the `color` attribute.  We recommend the
   > use of a rendering color space well defined in terms of a Illuminant D
@@ -314,29 +324,30 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
 
   > A control to shape the spread of light.  Higher focus
   > values pull light towards the center and narrow the spread.
-  > 
+  >
   > This is implemented as a multiplication with the absolute value of the
   > dot product between the light's surface normal and the emission
   > direction, raised to the power `focus`.  See `inputs:shaping:focusTint`
   > for the complete formula - but if we assume a default `focusTint` of
   > pure black, then that formula simplifies to:
-  > 
+  >
   > <center><b>
   >     focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup>
   > <p>
   >             L<sub>Color</sub> = focusFactor ⋅ L<sub>Color</sub>
+  > <p>
   > </b></center>
-  > 
+  >
   > Values < 0 are ignored
 
 - ##### Attribute: `inputs:shaping:focusTint`
 
   > Off-axis color tint.  This tints the emission in the
   > falloff region.  The default tint is black.
-  > 
+  >
   > This is implemented as a linear interpolation between `focusTint` and
   > white, by the factor computed from the focus attribute, in other words:
-  > 
+  >
   > <center><b>
   >     focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup>
   > <p>
@@ -344,17 +355,18 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > <p>
   >         L<sub>Color</sub> =
   >             componentwiseMultiply(focusColor, L<sub>Color</sub>)
+  > <p>
   > </b></center>
-  > 
+  >
   > Note that this implies that a focusTint of pure white will disable
   > focus.
 
   > Off-axis color tint.  This tints the emission in the
   > falloff region.  The default tint is black.
-  > 
+  >
   > This is implemented as a linear interpolation between `focusTint` and
   > white, by the factor computed from the focus attribute, in other words:
-  > 
+  >
   > <center><b>
   >     focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup>
   > <p>
@@ -362,8 +374,9 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > <p>
   >         L<sub>Color</sub> =
   >             componentwiseMultiply(focusColor, L<sub>Color</sub>)
+  > <p>
   > </b></center>
-  > 
+  >
   > Note that this implies that a focusTint of pure white will disable
   > focus.
 
@@ -372,11 +385,11 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
 
   > Angular limit off the primary axis to restrict the light
   > spread, in degrees.
-  > 
+  >
   > Light emissions at angles off the primary axis greater than this are
   > guaranteed to be zero, ie:
-  > 
-  > 
+  >
+  >
   > <center><b>
   >             𝛳<sub>offAxis</sub> = acos(lightAxis • emissionDir)
   > <p>
@@ -386,7 +399,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   >                     ⟹ L<sub>Scalar</sub> = 0
   > <p>
   > </b></center>
-  > 
+  >
   > For angles < coneAngle, behavior is determined by shaping:cone:softness
   > - see below.  But at the default of coneSoftness = 0, the luminance is
   > unaltered if the emissionOffAxisAngle <= coneAngle, so the coneAngle
@@ -395,16 +408,16 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
 - ##### Attribute: `inputs:shaping:cone:softness`
 
   > Controls the cutoff softness for cone angle.
-  > 
+  >
   > At the default of coneSoftness = 0, the luminance is unaltered if the
   > emissionOffAxisAngle <= coneAngle, and 0 if
   > emissionOffAxisAngle > coneAngle, so in this situation the coneAngle
   > functions as a hard binary "off" toggle for all angles > coneAngle.
-  > 
+  >
   > For coneSoftness in the range (0, 1], it defines the proportion of the
   > non-cutoff angles over which the luminance is smoothly interpolated from
   > 0 to 1.  Mathematically:
-  > 
+  >
   > <center><b>
   >         𝛳<sub>offAxis</sub> = acos(lightAxis • emissionDir)
   > <p>
@@ -416,28 +429,29 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   >             (1 - smoothStep(𝛳<sub>offAxis</sub>,
   >                             𝛳<sub>smoothStart</sub>,
   >                             𝛳<sub>cutoff</sub>)
+  > <p>
   > </b></center>
-  > 
+  >
   > Values outside of the [0, 1] range are clamped to the range.
 
 - ##### Attribute: `inputs:shaping:ies:file`
 
   > An IES (Illumination Engineering Society) light
   > profile describing the angular distribution of light.
-  > 
+  >
   > For full details on the .ies file format, see the full specification,
   > ANSI/IES LM-63-19:
-  > 
+  >
   > https://store.ies.org/product/lm-63-19-approved-method-ies-standard-file-format-for-the-electronic-transfer-of-photometric-data-and-related-information/
-  > 
+  >
   > The luminous intensity values in the ies profile are sampled using
   > the emission direction in the light's local space (after a possible
   > transformtion by a non-zero shaping:ies:angleScale, see below). The
   > sampled value is then potentially normalized by the overal power of the
   > profile if shaping:ies:normalize is enabled, and then used as a scaling
   > factor on the returned luminance:
-  > 
-  > 
+  >
+  >
   > <center><b>
   >         𝛳<sub>light</sub>, 𝜙 =
   >             toPolarCoordinates(emissionDirectionInLightSpace)
@@ -449,8 +463,9 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   >         iesNormalize ⟹ iesSample = iesSample ⋅ iesProfilePower(iesFile)
   > <p>
   >             L<sub>Color</sub> = iesSample ⋅ L<sub>Color</sub>
+  > <p>
   > </b></center>
-  > 
+  >
   > See `inputs:shaping:ies:angleScale` for a description of
   > `applyAngleScale`, and `inputs:shaping:ies:normalize` for how
   > `iesProfilePower` is calculated.
@@ -458,7 +473,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
 - ##### Attribute: `inputs:shaping:ies:angleScale`
 
   > Rescales the angular distribution of the IES profile.
-  > 
+  >
   > Applies a scaling factor to the latitudinal theta/vertical polar
   > coordinate before sampling the ies profile, to shift the samples more
   > toward the "top" or "bottom" of the profile. The scaling origin is
@@ -467,29 +482,30 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > This has the effect that negative values (greater than -1.0) decrease
   > the sampled IES theta, while positive values increase the sampled IES
   > theta.
-  > 
+  >
   > Specifically, this factor is applied:
-  > 
+  >
   > <center><b>
   >             profileScale = 1 + angleScale
   > <p>
   > 𝛳<sub>ies</sub> = (𝛳<sub>light</sub> - 𝜋) / profileScale + 𝜋
   > <p>
   >             𝛳<sub>ies</sub> = clamp(𝛳<sub>ies</sub>, 0, 𝜋)
+  > <p>
   > </b></center>
-  > 
+  >
   > ...where <i>𝛳<sub>light</sub></i> is the latitudinal theta polar
   > coordinate of the emission direction in the light's local space, and
   > <em>𝛳<sub>ies</sub></em> is the value that will be used when
   > actually sampling the profile.
-  > 
+  >
   > Values below -1.0 are clipped to -1.0.
 
 - ##### Attribute: `inputs:shaping:ies:normalize`
 
   > Normalizes the IES profile so that it affects the shaping
   > of the light while preserving the overall energy output.
-  > 
+  >
   > The sampled luminous intensity is scaled by the overall power of the
   > ies profile if this is on, where the total power is calculated by
   > integrating the luminous intensity over all solid angle patches
@@ -502,7 +518,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > Angular diameter of the light in degrees.
   > As an example, the Sun is approximately 0.53 degrees as seen from Earth.
   > Higher values broaden the light and therefore soften shadow edges.
-  > 
+  >
   > This value is assumed to be in the range `0 <= angle < 360`, and will
   > be clipped to this range. Note that this implies that we can have a
   > distant light emitting from more than a hemispherical area of light
