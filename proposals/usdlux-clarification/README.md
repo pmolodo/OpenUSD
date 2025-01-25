@@ -129,10 +129,10 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > Expresses the "base", unmultiplied luminance emitted (L) of the light,
   > in nits (cd∕m²):
   >
-  > <div align="center"><b>
-  >                 L<sub>Scalar</sub> = intensity
+  > <div align="center">
+  >                 <b>L<sub>Scalar</sub> = intensity</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > Normatively, the lights' emission is in units of spectral radiance
   > normalized such that a directly visible light with `intensity` 1 and
@@ -147,10 +147,10 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > of 2 (similar to an F-stop control over exposure).  The result
   > is multiplied against the intensity:
   >
-  > <div align="center"><b>
-  >         L<sub>Scalar</sub> = L<sub>Scalar</sub> ⋅ 2<sup>exposure</sup>
+  > <div align="center">
+  >         <b>L<sub>Scalar</sub> = L<sub>Scalar</sub> ⋅ 2<sup>exposure</sup></b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > Normatively, the lights' emission is in units of spectral radiance
   > normalized such that a directly visible light with `intensity` 1 and
@@ -172,10 +172,10 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > Mathematically, this means that the luminance of the light will be
   > divided by a factor representing the "size" of the light:
   >
-  > <div align="center"><b>
-  >                 L<sub>Scalar</sub> = L<sub>Scalar</sub> / sizeFactor
+  > <div align="center">
+  >                 <b>L<sub>Scalar</sub> = L<sub>Scalar</sub> / sizeFactor</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > ...where `sizeFactor` = 1 if `normalize` is off, and is calculated
   > depending on the family of the light as described below if `normalize`
@@ -186,10 +186,10 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > For a dome light (and its henchman, the PortalLight), this attribute is
   > ignored:
   >
-  > <div align="center"><b>
-  >                 sizeFactor<sub>dome</sub> = 1
+  > <div align="center">
+  >                 <b>sizeFactor<sub>dome</sub> = 1</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > ### Area Lights:
   >
@@ -205,40 +205,40 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > - CylinderLight
   > - (deprecated) GeometryLight
   >
-  > <div align="center"><b>
-  >                 sizeFactor<sub>area</sub> = worldSpaceSurfaceArea(light)
+  > <div align="center">
+  >                 <b>sizeFactor<sub>area</sub> = worldSpaceSurfaceArea(light)</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > ### DistantLight:
   >
   > For distant lights, we first define 𝛳<sub>max</sub> as:
   >
-  > <div align="center"><b>
-  >         𝛳<sub>max</sub> = clamp(toRadians(distantLightAngle) / 2, 0, 𝜋)
+  > <div align="center">
+  >         <b>𝛳<sub>max</sub> = clamp(toRadians(distantLightAngle) / 2, 0, 𝜋)</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > Then we use the following formula:
   >
   > * <i>if 𝛳<sub>max</sub> = 0:</i>
-  > <div align="center"><b>
-  >         sizeFactor<sub>distant</sub> = 1
+  > <div align="center">
+  >         <b>sizeFactor<sub>distant</sub> = 1</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > * <i>if 0 < 𝛳<sub>max</sub> ≤ 𝜋 / 2:</i>
-  > <div align="center"><b>
-  >     sizeFactor<sub>distant</sub> = sin²𝛳<sub>max</sub> ⋅ 𝜋
+  > <div align="center">
+  >     <b>sizeFactor<sub>distant</sub> = sin²𝛳<sub>max</sub> ⋅ 𝜋</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > * <i>if 𝜋 / 2 < 𝛳<sub>max</sub> ≤ 𝜋:</i>
-  > <div align="center"><b>
-  >             sizeFactor<sub>distant</sub> =
-  >                 (2 - sin²𝛳<sub>max</sub>) ⋅ 𝜋
+  > <div align="center">    
+  >             <b>sizeFactor<sub>distant</sub> =
+  >                 (2 - sin²𝛳<sub>max</sub>) ⋅ 𝜋</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > This formula is used because it satisfies the following two properties:
   >
@@ -287,10 +287,10 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   >
   > This color is just multiplied with the emission:
   >
-  > <div align="center"><b>
-  >                 L<sub>Color</sub> = L<sub>Scalar</sub> ⋅ color
+  > <div align="center">
+  >                 <b>L<sub>Color</sub> = L<sub>Scalar</sub> ⋅ color</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > In the case of a spectral renderer, this color should be uplifted such
   > that it round-trips to within the limit of numerical accuracy under the
@@ -331,12 +331,12 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > for the complete formula - but if we assume a default `focusTint` of
   > pure black, then that formula simplifies to:
   >
-  > <div align="center"><b>
-  >     focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup>
+  > <div align="center">
+  >     <b>focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup></b>
   > <p>
-  >             L<sub>Color</sub> = focusFactor ⋅ L<sub>Color</sub>
+  >             <b>L<sub>Color</sub> = focusFactor ⋅ L<sub>Color</sub></b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > Values < 0 are ignored
 
@@ -348,34 +348,15 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > This is implemented as a linear interpolation between `focusTint` and
   > white, by the factor computed from the focus attribute, in other words:
   >
-  > <div align="center"><b>
-  >     focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup>
+  > <div align="center">
+  >     <b>focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup></b>
   > <p>
-  >         focusColor = lerp(focusFactor, focusTint, [1, 1, 1])
+  >         <b>focusColor = lerp(focusFactor, focusTint, [1, 1, 1])</b>
   > <p>
-  >         L<sub>Color</sub> =
-  >             componentwiseMultiply(focusColor, L<sub>Color</sub>)
+  >         <b>L<sub>Color</sub> =
+  >             componentwiseMultiply(focusColor, L<sub>Color</sub>)</b>
   > <p>
-  > </b></div>
-  >
-  > Note that this implies that a focusTint of pure white will disable
-  > focus.
-
-  > Off-axis color tint.  This tints the emission in the
-  > falloff region.  The default tint is black.
-  >
-  > This is implemented as a linear interpolation between `focusTint` and
-  > white, by the factor computed from the focus attribute, in other words:
-  >
-  > <div align="center"><b>
-  >     focusFactor = ｜emissionDirection • lightNormal｜<sup>focus</sup>
-  > <p>
-  >         focusColor = lerp(focusFactor, focusTint, [1, 1, 1])
-  > <p>
-  >         L<sub>Color</sub> =
-  >             componentwiseMultiply(focusColor, L<sub>Color</sub>)
-  > <p>
-  > </b></div>
+  > </div>
   >
   > Note that this implies that a focusTint of pure white will disable
   > focus.
@@ -390,15 +371,15 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > guaranteed to be zero, ie:
   >
   >
-  > <div align="center"><b>
-  >             𝛳<sub>offAxis</sub> = acos(lightAxis • emissionDir)
+  > <div align="center">
+  >             <b>𝛳<sub>offAxis</sub> = acos(lightAxis • emissionDir)</b>
   > <p>
-  >             𝛳<sub>cutoff</sub> = toRadians(coneAngle)
+  >             <b>𝛳<sub>cutoff</sub> = toRadians(coneAngle)</b>
   > <p>
-  >             𝛳<sub>offAxis</sub> > 𝛳<sub>cutoff</sub>
-  >                     ⟹ L<sub>Scalar</sub> = 0
+  >             <b>𝛳<sub>offAxis</sub> > 𝛳<sub>cutoff</sub>
+  >                     ⟹ L<sub>Scalar</sub> = 0</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > For angles < coneAngle, behavior is determined by shaping:cone:softness
   > - see below.  But at the default of coneSoftness = 0, the luminance is
@@ -418,19 +399,19 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > non-cutoff angles over which the luminance is smoothly interpolated from
   > 0 to 1.  Mathematically:
   >
-  > <div align="center"><b>
-  >         𝛳<sub>offAxis</sub> = acos(lightAxis • emissionDir)
+  > <div align="center">
+  >         <b>𝛳<sub>offAxis</sub> = acos(lightAxis • emissionDir)</b>
   > <p>
-  >             𝛳<sub>cutoff</sub> = toRadians(coneAngle)
+  >             <b>𝛳<sub>cutoff</sub> = toRadians(coneAngle)</b>
   > <p>
-  >     𝛳<sub>smoothStart</sub> = lerp(coneSoftness, 𝛳<sub>cutoff</sub>, 0)
+  >     <b>𝛳<sub>smoothStart</sub> = lerp(coneSoftness, 𝛳<sub>cutoff</sub>, 0)</b>
   > <p>
-  >     L<sub>Scalar</sub> = L<sub>Scalar</sub> ⋅
+  >     <b>L<sub>Scalar</sub> = L<sub>Scalar</sub> ⋅
   >             (1 - smoothStep(𝛳<sub>offAxis</sub>,
   >                             𝛳<sub>smoothStart</sub>,
-  >                             𝛳<sub>cutoff</sub>)
+  >                             𝛳<sub>cutoff</sub>)</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > Values outside of the [0, 1] range are clamped to the range.
 
@@ -485,14 +466,14 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   >
   > Specifically, this factor is applied:
   >
-  > <div align="center"><b>
-  >             profileScale = 1 + angleScale
+  > <div align="center">
+  >             <b>profileScale = 1 + angleScale</b>
   > <p>
-  > 𝛳<sub>ies</sub> = (𝛳<sub>light</sub> - 𝜋) / profileScale + 𝜋
+  >    <b>𝛳<sub>ies</sub> = (𝛳<sub>light</sub> - 𝜋) / profileScale + 𝜋</b>
   > <p>
-  >             𝛳<sub>ies</sub> = clamp(𝛳<sub>ies</sub>, 0, 𝜋)
+  >             <b>𝛳<sub>ies</sub> = clamp(𝛳<sub>ies</sub>, 0, 𝜋)</b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > ...where <i>𝛳<sub>light</sub></i> is the latitudinal theta polar
   > coordinate of the emission direction in the light's local space, and
