@@ -234,7 +234,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > </div>
   >
   > * <i>if 𝜋 / 2 < 𝛳<sub>max</sub> ≤ 𝜋:</i>
-  > <div align="center">    
+  > <div align="center">
   >             <b>sizeFactor<sub>distant</sub> =
   >                 (2 - sin²𝛳<sub>max</sub>) ⋅ 𝜋</b>
   > <p>
@@ -433,19 +433,19 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > factor on the returned luminance:
   >
   >
-  > <div align=center><b>
-  >         𝛳<sub>light</sub>, 𝜙 =
-  >             toPolarCoordinates(emissionDirectionInLightSpace)
+  > <div align=center>
+  >         <b>𝛳<sub>light</sub>, 𝜙 =
+  >             toPolarCoordinates(emissionDirectionInLightSpace)</b>
   > <p>
-  >     𝛳<sub>ies</sub> = applyAngleScale(𝛳<sub>light</sub>, angleScale)
+  >     <b>𝛳<sub>ies</sub> = applyAngleScale(𝛳<sub>light</sub>, angleScale)</b>
   > <p>
-  >             iesSample = sampleIES(iesFile, 𝛳<sub>ies</sub>, 𝜙)
+  >             <b>iesSample = sampleIES(iesFile, 𝛳<sub>ies</sub>, 𝜙)</b>
   > <p>
-  >         iesNormalize ⟹ iesSample = iesSample ⋅ iesProfilePower(iesFile)
+  >         <b>iesNormalize ⟹ iesSample = iesSample ⋅ iesProfilePower(iesFile)</b>
   > <p>
-  >             L<sub>Color</sub> = iesSample ⋅ L<sub>Color</sub>
+  >             <b>L<sub>Color</sub> = iesSample ⋅ L<sub>Color</sub></b>
   > <p>
-  > </b></div>
+  > </div>
   >
   > See `inputs:shaping:ies:angleScale` for a description of
   > `applyAngleScale`, and `inputs:shaping:ies:normalize` for how
