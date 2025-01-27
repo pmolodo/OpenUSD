@@ -52,19 +52,19 @@ Support for UsdLux-defined lights has already been added to several renderers.  
 
 We expect/hope renderers will update their implementations to conform to the new, more precise definitions in this proposal by default.  Since the exact details on current UsdLux implementation are renderer specific, we leave it up to each renderer to decide how best to deal with compatibility with existing UsdLux assets designed with the "old" ambiguous behavior in mind.  However, if they opt to support some form of backward compatibility for existing assets, we can provide some guidelines:
 
-- Renderers can provide a means to explicitly specify whether a given UsdLux asset should use "old" (ambiguously-defined) behavior or "new" (precisely defined, in accordance with this proposal) behavior.
-  - For instance, a hypothetical HappyRenderer could check for the existence of a "happy:usdlux_old_compatibility" boolean attribute, and if authored, always use "old" behavior if true, and "new" behavior if false for that asset.
-- For assets with no such attribute authored, default should be the "new" behavior.
-- However, renderers can provide a way to override the default behavior for prims with no explicit behavior specified
-  - For instance, HappyRenderer could check whether a "HAPPY_USDLUX_OLD_COMPATIBILITY" environment var is set, and if so, use that to determine default behavior.
-  - If no environment var is set, it could check for the value of a "usdlux_old_compatibility" configuration option in it's renderer configuration files, and potentially use that to override default behavior.
+- Renderers can provide a renderer-specific configuration option to specify whether UsdLux should use "old" (ambiguously-defined) behavior or "new" (precisely defined, in accordance with this proposal) behavior
+- By default, renderers should use "new" behavior
+- For instance, a hypothetical HappyRenderer might:
+  - First check if the rendered stage has a RenderSettings node with a "happy:usdlux_old_compatibility" boolean attribute set, and if authored, always use "old" behavior if true, and "new" behavior if false for that stage.
+  - If no RenderSetting attribute is set, it could check whether a "HAPPY_USDLUX_OLD_COMPATIBILITY" environment var is set, and if so, use that to determine default behavior
+  - If no environment var is set, it could check for the value of a "usdlux_old_compatibility" configuration option in it's renderer configuration files, located at `~/.happy/config.toml` and `/etc/happy/config.yaml`.
+  - Otherwise, assume "new" behavior
 
-As mentioned above, we expect most existing usage of UsdLux assets to be "site internal" to a specific company or project.  By providing a way to control default behavior and have explicit overrides, it allows such entities several options for how to handle compatibility / transition:
+As mentioned above, we expect most existing usage of UsdLux stages to be "site internal" to a specific company or project.  By providing a way to control default behavior and have explicit overrides, it allows such entities several options for how to handle compatibility / transition:
 
-- They could opt to do a one-time mass conversion of all existing assets to be explicitly tagged as having "usdlux_old_compatibility".  Going forward, all new UsdLux assets would inherit the "new" behavior by default.
+- They could opt to do a one-time mass conversion of all existing rendered stages to be explicitly tagged as having "usdlux_old_compatibility"
 - They could opt to alter configuration on a per-project basis, if they have project-wide renderer configuration files
-- They could specify "old" behavior by default in a site-wide renderer configuration file.  Going forward, all new UsdLux assets could be explicitly authored as using the "new behavior".  At some point in the future when no "old" assets are in use, they could switch the site-wide default to "new", and stop explicitly authoring compatibilty information on new assets.
-
+- They could specify "old" behavior by default in a site-wide renderer configuration file.  Going forward, all new rendered stages could be explicitly authored as using the "new behavior".  At some point in the future when no "old" stages are in use, they could switch the site-wide default to "new", and stop explicitly authoring compatibilty information on new stages.
 
 ### Updated Schema Classes and Attributes
 
