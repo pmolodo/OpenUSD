@@ -86,7 +86,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   More precisely, we propose introducing this text into the documentation for `LightAPI`:
 
   >
-  > **Quantities and Units**
+  > <b>Quantities and Units</b>
   >
   > Most renderers consuming OpenUSD today are RGB renderers, rather than
   > spectral. Units in RGB renderers are tricky to define as each of the red,
@@ -433,7 +433,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > factor on the returned luminance:
   >
   >
-  > <div align=center>
+  > <div align="center">
   >         <b>𝛳<sub>light</sub>, 𝜙 =
   >             toPolarCoordinates(emissionDirectionInLightSpace)</b>
   > <p>
