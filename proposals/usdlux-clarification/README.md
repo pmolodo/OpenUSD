@@ -85,7 +85,6 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
 
   More precisely, we propose introducing this text into the documentation for `LightAPI`:
 
-  >
   > <b>Quantities and Units</b>
   >
   > Most renderers consuming OpenUSD today are RGB renderers, rather than
@@ -121,9 +120,8 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > as the rendering color space, and instead encourage the use of color spaces
   > whose white point has a well-defined spectral representation, such as D65.
 
-
 - ##### Attribute: `inputs:intensity`
-  
+
   > Scales the brightness of the light linearly.
   >
   > Expresses the "base", unmultiplied luminance emitted (L) of the light,
@@ -235,24 +233,24 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   >
   > * <i>if 𝜋 / 2 < 𝛳<sub>max</sub> ≤ 𝜋:</i>
   > <div align="center">
-  >             <b>sizeFactor<sub>distant</sub> =
-  >                 (2 - sin²𝛳<sub>max</sub>) ⋅ 𝜋</b>
+  >             <b>sizeFactor<sub>distant</sub> =</b>
+  >                 <b>(2 - sin²𝛳<sub>max</sub>) ⋅ 𝜋</b>
   > <p>
   > </div>
   >
   > This formula is used because it satisfies the following two properties:
   >
   > 1. When normalize is enabled, the received illuminance from this light
-  >     on a surface normal to the light's primary direction is held constant
-  >     when angle changes, and the "intensity" property becomes a measure of
-  >     the illuminance, expressed in lux, for a light with 0 exposure.
+  >    on a surface normal to the light's primary direction is held constant
+  >    when angle changes, and the "intensity" property becomes a measure of
+  >    the illuminance, expressed in lux, for a light with 0 exposure.
   >
   > 2. If we assume that our distant light is an approximation for a "very
-  >     far" sphere light (like the sun), then (for
-  >     *0 < 𝛳<sub>max</sub> ≤ 𝜋/2*) this definition agrees with the
-  >     definition used for area lights - ie, the total power of this distant
-  >     sphere light is constant when the "size" (ie, angle) changes, and our
-  >     sizeFactor is proportional to the total surface area of this sphere.
+  >    far" sphere light (like the sun), then (for
+  >    *0 < 𝛳<sub>max</sub> ≤ 𝜋/2*) this definition agrees with the
+  >    definition used for area lights - ie, the total power of this distant
+  >    sphere light is constant when the "size" (ie, angle) changes, and our
+  >    sizeFactor is proportional to the total surface area of this sphere.
   >
   > ### Other Lights
   >
@@ -265,15 +263,15 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > guidelines are:
   >
   > - Lights that either inherit from or are strongly associated with one of
-  >     the built-in types should follow the behavior of the built-in type
-  >     they inherit/resemble; ie, a renderer-specific "MyRendererRectLight"
-  >     should have its size factor be its world-space surface area
+  >   the built-in types should follow the behavior of the built-in type
+  >   they inherit/resemble; ie, a renderer-specific "MyRendererRectLight"
+  >   should have its size factor be its world-space surface area
   > - Lights that are boundable and have a calcuable surface area should
-  >     follow the rules for an Area Light, and have their sizeFactor be their
-  >     world-space surface area
+  >   follow the rules for an Area Light, and have their sizeFactor be their
+  >   world-space surface area
   > - Lights that are non-boundable and/or have no way to concretely or even
-  >     "intuitively" associate them with a "size" will ignore this attribe
-  >     (and always set sizeFactor = 1)
+  >   "intuitively" associate them with a "size" will ignore this attribe
+  >   (and always set sizeFactor = 1)
   >
   > Lights that don't clearly meet any of the above criteria may either
   > ignore the normalize attribute or try to implement support using
@@ -296,7 +294,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > that it round-trips to within the limit of numerical accuracy under the
   > rendering illuminant.  We recommend the use of a rendering color space
   > well defined in terms of a Illuminant D illuminant, to avoid unspecified
-  > uplift.  See: \\ref usdLux_quantities
+  > uplift.  See: \ref usdLux_quantities
 
 - ##### Attribute: `inputs:colorTemperature`
 
@@ -316,7 +314,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > Spectral renderers should do the same and then uplift the resulting
   > color after multiplying with the `color` attribute.  We recommend the
   > use of a rendering color space well defined in terms of a Illuminant D
-  > illuminant, to avoid unspecified uplift.  See: \\ref usdLux_quantities
+  > illuminant, to avoid unspecified uplift.  See: \ref usdLux_quantities
 
 #### ShapingAPI
 
@@ -353,14 +351,13 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > <p>
   >         <b>focusColor = lerp(focusFactor, focusTint, [1, 1, 1])</b>
   > <p>
-  >         <b>L<sub>Color</sub> =
-  >             componentwiseMultiply(focusColor, L<sub>Color</sub>)</b>
+  >         <b>L<sub>Color</sub> =</b>
+  >             <b>componentwiseMultiply(focusColor, L<sub>Color</sub>)</b>
   > <p>
   > </div>
   >
   > Note that this implies that a focusTint of pure white will disable
   > focus.
-
 
 - ##### Attribute: `inputs:shaping:cone:angle`
 
@@ -376,13 +373,14 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > <p>
   >             <b>𝛳<sub>cutoff</sub> = toRadians(coneAngle)</b>
   > <p>
-  >             <b>𝛳<sub>offAxis</sub> > 𝛳<sub>cutoff</sub>
-  >                     ⟹ L<sub>Scalar</sub> = 0</b>
+  >
+  >             <b>𝛳<sub>offAxis</sub> > 𝛳<sub>cutoff</sub></b>
+  >                     <b>⟹ L<sub>Scalar</sub> = 0</b>
   > <p>
   > </div>
   >
   > For angles < coneAngle, behavior is determined by shaping:cone:softness
-  > (see below).  But at the default of coneSoftness = 0, the luminance is
+  > - see below.  But at the default of coneSoftness = 0, the luminance is
   > unaltered if the emissionOffAxisAngle <= coneAngle, so the coneAngle
   > functions as a hard binary "off" toggle for all angles > coneAngle.
 
@@ -404,12 +402,12 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > <p>
   >             <b>𝛳<sub>cutoff</sub> = toRadians(coneAngle)</b>
   > <p>
-  >     <b>𝛳<sub>smoothStart</sub> = lerp(coneSoftness, 𝛳<sub>cutoff</sub>, 0)</b>
+  >   <b>𝛳<sub>smoothStart</sub> = lerp(coneSoftness, 𝛳<sub>cutoff</sub>, 0)</b>
   > <p>
-  >     <b>L<sub>Scalar</sub> = L<sub>Scalar</sub> ⋅
-  >             (1 - smoothStep(𝛳<sub>offAxis</sub>,
-  >                             𝛳<sub>smoothStart</sub>,
-  >                             𝛳<sub>cutoff</sub>)</b>
+  >     <b>L<sub>Scalar</sub> = L<sub>Scalar</sub> ⋅</b>
+  >             <b>(1 - smoothStep(𝛳<sub>offAxis</sub>,</b>
+  >                             <b>𝛳<sub>smoothStart</sub>,</b>
+  >                             <b>𝛳<sub>cutoff</sub>)</b>
   > <p>
   > </div>
   >
@@ -434,14 +432,14 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   >
   >
   > <div align="center">
-  >         <b>𝛳<sub>light</sub>, 𝜙 =
-  >             toPolarCoordinates(emissionDirectionInLightSpace)</b>
+  >         <b>𝛳<sub>light</sub>, 𝜙 =</b>
+  >             <b>toPolarCoordinates(emissionDirectionInLightSpace)</b>
   > <p>
   >     <b>𝛳<sub>ies</sub> = applyAngleScale(𝛳<sub>light</sub>, angleScale)</b>
   > <p>
   >             <b>iesSample = sampleIES(iesFile, 𝛳<sub>ies</sub>, 𝜙)</b>
   > <p>
-  >         <b>iesNormalize ⟹ iesSample = iesSample ⋅ iesProfilePower(iesFile)</b>
+  >      <b>iesNormalize ⟹ iesSample = iesSample ⋅ iesProfilePower(iesFile)</b>
   > <p>
   >             <b>L<sub>Color</sub> = iesSample ⋅ L<sub>Color</sub></b>
   > <p>
@@ -469,7 +467,7 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > <div align="center">
   >             <b>profileScale = 1 + angleScale</b>
   > <p>
-  >    <b>𝛳<sub>ies</sub> = (𝛳<sub>light</sub> - 𝜋) / profileScale + 𝜋</b>
+  > <b>𝛳<sub>ies</sub> = (𝛳<sub>light</sub> - 𝜋) / profileScale + 𝜋</b>
   > <p>
   >             <b>𝛳<sub>ies</sub> = clamp(𝛳<sub>ies</sub>, 0, 𝜋)</b>
   > <p>
