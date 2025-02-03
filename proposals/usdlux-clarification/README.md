@@ -19,33 +19,6 @@ To address this, we propose making two changes, in two stages: an update to docu
 
 We propose that the documentation for the UsdLux schema should be updated, such that the behavior of all UsdLux attributes are defined in precise terms.  The goal would be to eliminate ambiguity and ensure that all renderers which conform to these definitions will produce similar results.
 
-
-### Alternative approaches
-
-#### New Schemas (or new schema versions)
-
-We could have opted to create an entirely new schema, possibly making use of USD's [schema versioning].  The advantage of this would be backward compatibility for existing UsdLux assets - any renderers which previously implemented any UsdLux behavior in a different way could retain their existing implementation for the "old" schema, and only provide new / unified behavior for a new schema.
-
-However, we felt that it would be better to simply update the existing schema, for the following reasons:
-
-- **Not Keeping Undefined Behavior**
-
-  In most cases, we are not changing defined behavior, but clarifying undefined or ambiguously defined behavior.  If we leave the current schema "as is", then we are essentially committing to forever keeping the current schema's behavior undefined or poorly defined.
-
-- **C++ Complexity of Supporting Multiple Schemas**
-
-  If we introduce a completely new schema, it makes interacting with "generic" UsdLux objects difficult at a C++ level.  For instance, if we add a new `UsdLuxCylinderLight_1`, all C++ methods that currently work with `UsdLuxCylinderLight` will have to be modified to work with `std::variant<UsdLuxCylinderLight, UsdLuxCylinderLight_1>`, or else they are both made to inherit from a `UsdLuxCylinderLightBase`, etc.  In either case, it's a fairly large change to the existing APIs, both inside of the OpenUSD codebase, and for any 3rd-party render delegate implementations.
-
-  Unfortunately, current USD [schema versioning] doesn't help with this - it only provides utilities for identifying if two schemas share the same "family", but no means for treating members of a family in a unified manner.
-
-- **Relatively Low Current Adoption of UsdLux**
-
-  Without having done any formal polling, our general sense is that adoption of UsdLux is still fairly low.
-
-  The ambiguities in the current specification make UsdLux a poor fit for external interchange of lights, as there is no assurance that they will be interpreted in the same manner as originally intended.
-
-  Thus we expect most existing usage of UsdLux assets to be "site internal" - ie, for private assets used within a company in it's own rendering pipeline.  While it's hard to know the extent of such usage, such entities can employ tactics to ease transition that aren't applicable in the "general" case - see below for more details.
-
 ### Backward Compatibility Notes
 
 Support for UsdLux-defined lights has already been added to several renderers.  Unfortunately, due to the lack of precise definitions in the current schema, each renderer has had to make their own implementation decisions, resulting in divergent behavior.  Therefore, any existing UsdLux assets have an implicit dependency on the renderer they were "designed" for.
@@ -546,6 +519,32 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   > distant light emitting from more than a hemispherical area of light
   > if angle > 180. While this is valid, it is possible that for large
   > angles a DomeLight may provide better performance.
+
+### Alternative approaches
+
+#### New Schemas (or new schema versions)
+
+We could have opted to create an entirely new schema, possibly making use of USD's [schema versioning].  The advantage of this would be backward compatibility for existing UsdLux assets - any renderers which previously implemented any UsdLux behavior in a different way could retain their existing implementation for the "old" schema, and only provide new / unified behavior for a new schema.
+
+However, we felt that it would be better to simply update the existing schema, for the following reasons:
+
+- **Not Keeping Undefined Behavior**
+
+  In most cases, we are not changing defined behavior, but clarifying undefined or ambiguously defined behavior.  If we leave the current schema "as is", then we are essentially committing to forever keeping the current schema's behavior undefined or poorly defined.
+
+- **C++ Complexity of Supporting Multiple Schemas**
+
+  If we introduce a completely new schema, it makes interacting with "generic" UsdLux objects difficult at a C++ level.  For instance, if we add a new `UsdLuxCylinderLight_1`, all C++ methods that currently work with `UsdLuxCylinderLight` will have to be modified to work with `std::variant<UsdLuxCylinderLight, UsdLuxCylinderLight_1>`, or else they are both made to inherit from a `UsdLuxCylinderLightBase`, etc.  In either case, it's a fairly large change to the existing APIs, both inside of the OpenUSD codebase, and for any 3rd-party render delegate implementations.
+
+  Unfortunately, current USD [schema versioning] doesn't help with this - it only provides utilities for identifying if two schemas share the same "family", but no means for treating members of a family in a unified manner.
+
+- **Relatively Low Current Adoption of UsdLux**
+
+  Without having done any formal polling, our general sense is that adoption of UsdLux is still fairly low.
+
+  The ambiguities in the current specification make UsdLux a poor fit for external interchange of lights, as there is no assurance that they will be interpreted in the same manner as originally intended.
+
+  Thus we expect most existing usage of UsdLux assets to be "site internal" - ie, for private assets used within a company in it's own rendering pipeline.  While it's hard to know the extent of such usage, such entities can employ tactics to ease transition that aren't applicable in the "general" case - see below for more details.
 
 ### Reference Pull Request
 
