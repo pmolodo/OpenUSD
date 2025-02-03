@@ -455,30 +455,73 @@ Here are the suggested updates to the documentation in `usdLux/schema.usda`:
   >
   > Applies a scaling factor to the latitudinal theta/vertical polar
   > coordinate before sampling the ies profile, to shift the samples more
-  > toward the "top" or "bottom" of the profile. The scaling origin is
-  > centered at theta = pi / 180 degrees, so theta = pi is always unaltered,
-  > regardless of the angleScale.  The scaling amount is `1 + angleScale`.
-  > This has the effect that negative values (greater than -1.0) decrease
-  > the sampled IES theta, while positive values increase the sampled IES
-  > theta.
+  > toward the "top" or "bottom" of the profile. The scaling origin varies
+  > depending on whether `angleScale` is positive or negative.  If it is
+  > positive, the scaling origin is theta = 0; if it is negative, the
+  > scaling origin is theta = pi (180 degrees).  Values where
+  > |angleScale| < 1 will "shrink" the angular range in which the
+  > iesProfile is applied, while values where |angleScale| > 1 will
+  > "grow" the angular range to which the iesProfile is mapped.
   >
-  > Specifically, this factor is applied:
+  > If <i>𝛳<sub>light</sub></i> is the latitudinal theta polar
+  > coordinate of the emission direction in the light's local space, and
+  > <em>𝛳<sub>ies</sub></em> is the value that will be used when
+  > actually sampling the profile, then the exact formula is:
   >
+  > * <i>if angleScale > 0:</i>
   > <div align="center">
-  >             <b>profileScale = 1 + angleScale</b>
-  > <p>
-  > <b>𝛳<sub>ies</sub> = (𝛳<sub>light</sub> - 𝜋) / profileScale + 𝜋</b>
-  > <p>
-  >             <b>𝛳<sub>ies</sub> = clamp(𝛳<sub>ies</sub>, 0, 𝜋)</b>
+  >         <b>𝛳<sub>ies</sub> = 𝛳<sub>light</sub> / angleScale</b>
   > <p>
   > </div>
   >
-  > ...where <i>𝛳<sub>light</sub></i> is the latitudinal theta polar
-  > coordinate of the emission direction in the light's local space, and
-  > <em>𝛳<sub>ies</sub></em> is the value that will be used when
-  > actually sampling the profile.
+  > * <i>if angleScale = 0:</i>
+  > <div align="center">
+  >         <b>𝛳<sub>ies</sub> = 𝛳<sub>light</sub></b>
+  > <p>
+  > </div>
   >
-  > Values below -1.0 are clipped to -1.0.
+  > * <i>if angleScale < 0:</i>
+  > <div align="center">
+  >         <b>𝛳<sub>ies</sub> = (𝛳<sub>light</sub> - π) / -angleScale</b>
+  > <p>
+  > </div>
+  >
+  > Usage guidelines for artists / lighting TDs:
+  > --------------------------------------------
+  >
+  > **if you have an ies profile for a spotlight aimed "down":**
+  >
+  > - you should use a positive angleScale (> 0)
+  > - values where 0 < angleScale < 1 will narrow the spotlight beam
+  > - values where angleScale > 1 will broaden the spotlight beam
+  > - ie, if the original ies profile is a downward spotlight with
+  >     a total cone angle of 60°, then angleScale = .5 will narrow it to
+  >     have a cone angle of 30°, and an angleScale of 1.5 will broaden it
+  >     to have a cone angle of 90°
+  >
+  > **if you have an ies profile for a spotlight aimed "up":**
+  >
+  > - you should use a negative angleScale (< 0)
+  > - values where -1 < angleScale < 0 will narrow the spotlight beam
+  > - values where angleScale < -1 will broaden the spotlight beam
+  > - ie, if the original ies profile is an upward spotlight with
+  >     a total cone angle of 60°, then angleScale = -.5 will narrow it to
+  >     have a cone angle of 30°, and an angleScale of -1.5 will broaden
+  >     it to have a cone angle of 90°
+  >
+  > **if you have an ies profile that's isn't clearly "aimed" in a single
+  > direction, OR it's aimed in a direction other than straight up or
+  > down:**
+  >
+  > - applying angleScale will alter the vertical angle mapping for your
+  >     ies light, but it may be difficult to have a clear intuitive sense
+  >     of how varying the angleScale will affect the shape of your light
+  >
+  > If you violate the above rules (ie, use a negative angleScale for a
+  > spotlight aimed down), then angleScale will still alter the vertical-
+  > angle mapping, but in more non-intuitive ways (ie, broadening /
+  > narrowing may seem inverted, and the ies profile may seem to "translate"
+  > through the vertical angles, rather than uniformly scale).
 
 - ##### Attribute: `inputs:shaping:ies:normalize`
 
