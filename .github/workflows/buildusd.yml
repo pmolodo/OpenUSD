@@ -6,6 +6,7 @@ permissions:
 on:
   push:
     branches:
+      - ci/personal-fork-test-20261002
       - dev
       - 'v[0-9][0-9].[0-9][0-9]'
   pull_request:
@@ -111,7 +112,8 @@ jobs:
   GPUTests:
     needs:
       - Linux
-    if: ${{ github.event_name == 'push' }}
+    # This personal-fork test uses standard GitHub-hosted runners only.
+    if: ${{ false }}
     runs-on: enterprise-linux-x64-t4gpu-4core-16vram-28ram-176ssd
     permissions:
       contents: write # Grant write permissions in order to upload artifacts
