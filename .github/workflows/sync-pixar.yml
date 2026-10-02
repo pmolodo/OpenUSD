@@ -1,0 +1,58 @@
+name: Sync Pixar branches
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-pixar-branches
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'pmolodo/OpenUSD' && github.ref == 'refs/heads/ci-testing'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Mirror Pixar branches
+        shell: bash
+        env:
+          UPSTREAM_URL: https://github.com/PixarAnimationStudios/OpenUSD.git
+        run: |
+          set -euo pipefail
+          branches=(dev release build-ig)
+          upstream_refs=()
+          fork_refs=()
+          leases=()
+          updates=()
+
+          for branch in "${branches[@]}"; do
+            upstream_refs+=("+refs/heads/$branch:refs/remotes/pixar/$branch")
+            fork_refs+=("+refs/heads/$branch:refs/remotes/origin/$branch")
+          done
+          git fetch --no-tags "$UPSTREAM_URL" "${upstream_refs[@]}"
+          git fetch --no-tags origin "${fork_refs[@]}"
+
+          for branch in "${branches[@]}"; do
+            expected=$(git rev-parse "refs/remotes/origin/$branch")
+            leases+=("--force-with-lease=refs/heads/$branch:$expected")
+            updates+=("refs/remotes/pixar/$branch:refs/heads/$branch")
+          done
+
+          # Mirror all three branches together, failing if the fork changes during the sync.
+          git push --atomic "${leases[@]}" origin "${updates[@]}"
+
+          for branch in "${branches[@]}"; do
+            revision=$(git rev-parse "refs/remotes/pixar/$branch")
+            printf '%s: `%s`\n\n' "$branch" "$revision" >> "$GITHUB_STEP_SUMMARY"
+          done
