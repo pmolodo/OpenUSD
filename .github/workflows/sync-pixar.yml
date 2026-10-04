@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   sync:
-    if: github.repository == 'pmolodo/OpenUSD' && github.ref == 'refs/heads/ci-testing'
+    if: github.ref == 'refs/heads/ci-testing'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
